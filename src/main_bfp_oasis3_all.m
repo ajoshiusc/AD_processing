@@ -52,7 +52,11 @@ for j=3:length(l)
 end
 
 %Process 300 subjects using BFP
-parfor s = 1:300
-    bfp(configfile, t1list{s}, fmrilist{s}, studydir, subnamelist{s}, sessionslist{s},TR);
+parfor s = 1:5%300
+    try
+        bfp(configfile, t1list{s}, fmrilist{s}, studydir, subnamelist{s}, sessionslist{s},TR);
+    catch 
+        fprintf('subject failed:%d  %s',s,subnamelist{s});
+    end
 end
 

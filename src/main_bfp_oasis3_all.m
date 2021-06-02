@@ -13,7 +13,7 @@ l=dir(subdir);
 
 s=0;
 parpool(6);
-parfor j=3:length(l)
+for j=3:length(l)
     subname=l(j).name;
     
     l2=dir(fullfile(subdir,subname));
@@ -43,8 +43,16 @@ parfor j=3:length(l)
     if exist(t1,'file')  &&  exist(fmri,'file')
         s=s+1;
         disp(subname);
-        
-        bfp(configfile, t1, fmri, studydir, subid, sessionid,TR);
+ 
+        t1list{s}=t1;
+        fmrilist{s}=fmri;
+        sessionslist{s}=sessions{1};
+        subnamelist{s}=subname;
     end
+end
+
+%Process 300 subjects using BFP
+parfor j = 1:300
+    bfp(configfile, t1list{s}, fmrilist{s}, studydir, subnamelist{s}, sessionslist{s},TR);
 end
 

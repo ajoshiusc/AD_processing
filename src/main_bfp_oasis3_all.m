@@ -52,7 +52,7 @@ for j=3:length(l)
 end
 
 %Process 300 subjects using BFP
-parfor j = 1:300
+parfor s = 1:300
     bfp(configfile, t1list{s}, fmrilist{s}, studydir, subnamelist{s}, sessionslist{s},TR);
 end
 

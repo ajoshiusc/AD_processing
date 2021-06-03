@@ -12,7 +12,6 @@ subdir='/ImagePTE1/ajoshi/oasis3_bids';
 l=dir(subdir);
 
 s=0;
-parpool(6);
 for j=3:length(l)
     subname=l(j).name;
     
@@ -30,7 +29,7 @@ for j=3:length(l)
     %fprintf('--------\n')
     
     t1=fullfile('/ImagePTE1/ajoshi/oasis3_bids/',subname,sessions{1},'anat',[subname,'_',sessions{1},'_run-01_T1w.nii.gz']);
-    fmri=fullfile('/ImagePTE1/ajoshi/oasis3_bids/',subname,sessions{1},'func',[subname,'_',sessions{1},'_task-rest_run-01_bold.nii.gz']);
+    fmri=fullfile('/ImagePTE1/ajoshi/oasis3_bids/',subname,sessions{1},'func',[subname,'_',sessions{1},'_task-rest_run-02_bold.nii.gz']);
     
     if ~exist(t1,'file')
         t1=fullfile('/ImagePTE1/ajoshi/oasis3_bids/',subname,sessions{1},'anat',[subname,'_',sessions{1},'_T1w.nii.gz']);
@@ -38,6 +37,9 @@ for j=3:length(l)
     
     if ~exist(fmri,'file')
         fmri=fullfile('/ImagePTE1/ajoshi/oasis3_bids/',subname,sessions{1},'func',[subname,'_',sessions{1},'_task-rest_bold.nii.gz']);
+        runname='run_00';
+    else
+        runname='run_02';
     end
     
     if exist(t1,'file')  &&  exist(fmri,'file')
@@ -48,13 +50,15 @@ for j=3:length(l)
         fmrilist{s}=fmri;
         sessionslist{s}=sessions{1};
         subnamelist{s}=subname;
+        runlist{s}=runname;
     end
 end
 
 %Process 300 subjects using BFP
-parfor s = 1:5%300
+parpool(6);
+parfor s = 1:300
     try
-        bfp(configfile, t1list{s}, fmrilist{s}, studydir, subnamelist{s}, sessionslist{s},TR);
+        bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], sessionslist{s},TR);
     catch 
         fprintf('subject failed:%d  %s',s,subnamelist{s});
     end

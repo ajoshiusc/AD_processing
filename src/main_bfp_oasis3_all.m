@@ -58,7 +58,7 @@ end
 parpool(6);
 parfor s = 1:300
     try
-        bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], sessionslist{s},TR);
+        bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], 'rest',TR);
     catch 
         fprintf('subject failed:%d  %s',s,subnamelist{s});
     end

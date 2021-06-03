@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xnat:Project ID="OASIS3" secondary_ID="OASIS3" xmlns:prov="http://www.nbirn.net/prov" xmlns:nunda="http://nrg.wustl.edu/nunda" xmlns:xnat="http://nrg.wustl.edu/xnat" xmlns:fs="http://nrg.wustl.edu/fs" xmlns:cat="http://nrg.wustl.edu/catalog" xmlns:uds="http://nrg.wustl.edu/uds" xmlns:wrk="http://nrg.wustl.edu/workflow" xmlns:genetics="http://nrg.wustl.edu/genetics" xmlns:arc="http://nrg.wustl.edu/arc" xmlns:pup="http://nrg.wustl.edu/pup" xmlns:adrc="http://nrg.wustl.edu/adrc" xmlns:xnat_a="http://nrg.wustl.edu/xnat_assessments" xmlns:neurocog="http://nrg.wustl.edu/neurocog" xmlns:cnda="http://nrg.wustl.edu/cnda" xmlns:sapssans="http://nrg.wustl.edu/sapssans" xmlns:xdat="http://nrg.wustl.edu/security" xmlns:pipe="http://nrg.wustl.edu/pipe" xmlns:scr="http://nrg.wustl.edu/scr" xmlns:sf="http://nrg.wustl.edu/sf" xmlns:val="http://nrg.wustl.edu/val" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://nrg.wustl.edu/neurocog https://central.xnat.org/schemas/neurocog.xsd http://nrg.wustl.edu/nunda https://central.xnat.org/schemas/nunda.xsd http://nrg.wustl.edu/workflow https://central.xnat.org/schemas/workflow.xsd http://nrg.wustl.edu/cnda https://central.xnat.org/schemas/cnda_xnat.xsd http://nrg.wustl.edu/security https://central.xnat.org/schemas/security.xsd http://nrg.wustl.edu/arc https://central.xnat.org/schemas/project.xsd http://nrg.wustl.edu/val https://central.xnat.org/schemas/protocolValidation.xsd http://www.nbirn.net/prov https://central.xnat.org/schemas/birnprov.xsd http://nrg.wustl.edu/pipe https://central.xnat.org/schemas/repository.xsd http://nrg.wustl.edu/scr https://central.xnat.org/schemas/screeningAssessment.xsd http://nrg.wustl.edu/sapssans https://central.xnat.org/schemas/sapssans.xsd http://nrg.wustl.edu/catalog https://central.xnat.org/schemas/catalog.xsd http://nrg.wustl.edu/pup https://central.xnat.org/schemas/pup.xsd http://nrg.wustl.edu/fs https://central.xnat.org/schemas/fs.xsd http://nrg.wustl.edu/genetics https://central.xnat.org/schemas/genetics.xsd http://nrg.wustl.edu/adrc https://central.xnat.org/schemas/adrc.xsd http://nrg.wustl.edu/uds https://central.xnat.org/schemas/uds.xsd http://nrg.wustl.edu/sf https://central.xnat.org/schemas/subjforms.xsd http://nrg.wustl.edu/xnat_assessments https://central.xnat.org/schemas/assessments.xsd http://nrg.wustl.edu/xnat https://central.xnat.org/schemas/xnat.xsd">
+<xnat:name>OASIS3</xnat:name>
+<xnat:description>Data Use Agreement at ** www.oasis-brains.org   ** &#13;
+&#13;
+###### Details and Download scripts available at ** www.oasis-brains.org   **        </xnat:description>
+<xnat:keywords>OASIS, OASIS3, OASIS-3</xnat:keywords>
+<xnat:aliases>
+<xnat:alias>OASIS</xnat:alias>
+</xnat:aliases>
+<xnat:studyProtocol ID="OASIS3_cnda_psychometricsData" name="Psych Assessments" data-type="cnda:psychometricsData" xsi:type="xnat:datatypeProtocol">
+<xnat:definitions>
+<xnat:definition ID="default" data-type="cnda:psychometricsData" description="UDS:C1 Neuropcychological Battery" project-specific="0">
+<xnat:fields>
+<xnat:field name="LOGIMEM" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=logimem]/field"/>
+<xnat:field name="DIGIF" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=digif]/field"/>
+<xnat:field name="DIGIFLEN" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=digiflen]/field"/>
+<xnat:field name="DIGIB" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=digib]/field"/>
+<xnat:field name="DIGIBLEN" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=digiblen]/field"/>
+<xnat:field name="ANIMALS" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=animals]/field"/>
+<xnat:field name="VEG" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=veg]/field"/>
+<xnat:field name="TRAILA" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=traila]/field"/>
+<xnat:field name="TRAILARR" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=trailarr]/field"/>
+<xnat:field name="TRAILALI" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=trailali]/field"/>
+<xnat:field name="TRAILB" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=trailb]/field"/>
+<xnat:field name="TRAILBRR" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=trailbrr]/field"/>
+<xnat:field name="TRAILBLI" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=trailbli]/field"/>
+<xnat:field name="WAIS" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=wais]/field"/>
+<xnat:field name="MEMUNITS" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=memunits]/field"/>
+<xnat:field name="MEMTIME" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=memtime]/field"/>
+<xnat:field name="BOSTON" type="custom" datatype="integer" required="0" xmlPath="cnda:psychometricsData/fields/field[name=boston]/field"/>
+</xnat:fields>
+</xnat:definition>
+</xnat:definitions>
+</xnat:studyProtocol>
+<xnat:studyProtocol ID="OASIS3_pup_pupTimeCourseData" name="PUPs" data-type="pup:pupTimeCourseData" xsi:type="xnat:datatypeProtocol">
+<xnat:definitions>
+<xnat:definition ID="default" data-type="pup:pupTimeCourseData" project-specific="1">
+<xnat:fields>
+<xnat:field name="Centil_fBP_TOT_CORTMEAN" type="custom" datatype="integer" xmlPath="pup:pupTimeCourseData/fields/field[name=centil_fbp_tot_cortmean]/field"/>
+<xnat:field name="Centil_fSUVR_TOT_CORTMEAN" type="custom" datatype="integer" xmlPath="pup:pupTimeCourseData/fields/field[name=centil_fsuvr_tot_cortmean]/field"/>
+<xnat:field name="Centil_fBP_rsf_TOT_CORTMEAN" type="custom" datatype="integer" xmlPath="pup:pupTimeCourseData/fields/field[name=centil_fbp_rsf_tot_cortmean]/field"/>
+<xnat:field name="Centil_fSUVR_rsf_TOT_CORTMEAN" type="custom" datatype="integer" xmlPath="pup:pupTimeCourseData/fields/field[name=centil_fsuvr_rsf_tot_cortmean]/field"/>
+</xnat:fields>
+</xnat:definition>
+</xnat:definitions>
+</xnat:studyProtocol>
+<xnat:studyProtocol ID="OASIS3_xnat_petSessionData" name="PETs" data-type="xnat:petSessionData" xsi:type="xnat:datatypeProtocol">
+<xnat:definitions>
+<xnat:definition ID="default" data-type="xnat:petSessionData" project-specific="0"/>
+</xnat:definitions>
+</xnat:studyProtocol>
+</xnat:Project>

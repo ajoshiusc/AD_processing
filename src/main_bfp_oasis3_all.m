@@ -1,12 +1,12 @@
 clc;clear all;close all;restoredefaultpath;
 %addpath(genpath('/big_disk/ajoshi/coding_ground/bfp/supp_data'))
-addpath(genpath('/ImagePTE1/ajoshi/code_farm/bfp/src'));
+addpath(genpath('/home/ajoshi/projects/bfp/src'));
 %    1050345 rest 2
 
-studydir='/ImagePTE1/ajoshi/bfp_oasis3';
+studydir='/deneb_disk/bfp_oasis3';
 TR='';
 % Set the input arguments
-configfile='/ImagePTE1/ajoshi/code_farm/AD_processing/src/config_bfp_preproc.ini';
+configfile='/home/ajoshi/projects/AD_processing/src/config_bfp_preproc.ini';
 
 subdir='/ImagePTE1/ajoshi/oasis3_bids';
 l=dir(subdir);

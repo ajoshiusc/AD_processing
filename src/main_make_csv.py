@@ -33,7 +33,7 @@ result = pd.merge(left=result,right=data2,on='Subject')
 
 print(result)
 
-result.rename(columns={'ageAtEntry':'Age', 'M/F':'gender', 'UDS B9: Clin. Judgements':'UDSB9'},inplace=True)
+result.rename(columns={'ageAtEntry':'Age', 'M/F':'Gender', "UDS B9: Clin. Judgements":'UDSB9'},inplace=True)
 
 result.to_csv('oasis3_bfp.csv')
 

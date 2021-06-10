@@ -54,9 +54,9 @@ for j=3:length(l)
     end
 end
 
-%Process 300 subjects using BFP
+%Process all subjects using BFP
 parpool(6);
-parfor s = 1:300
+parfor s = 1:length(subnamelist)
     try
         bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], 'rest',TR);
     catch 

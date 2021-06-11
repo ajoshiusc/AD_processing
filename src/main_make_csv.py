@@ -6,12 +6,14 @@ import pandas as pd
 
 s = os.listdir('/deneb_disk/bfp_oasis3')
 sub_ids = list()
+gord_fname_list = list()
 
 for n in range(len(s)):
     gord_fname = os.path.join('/deneb_disk/bfp_oasis3', s[n],'func',s[n]+'_rest_bold.32k.GOrd.filt.mat')
 
     if os.path.exists(gord_fname):
         sub_ids.append(s[n][4:12])
+        gord_fname_list.append(gord_fname)
     
 print(sub_ids)
 
@@ -28,6 +30,9 @@ data1 = df1['M/F'][sub_ids]
 data2 = df1['UDS B9: Clin. Judgements'][sub_ids]
 data3 = df2['ageAtEntry'][sub_ids]
 
+
+d={'FileNames':gord_fname_list}
+data4 = pd.DataFrame(index=data3.index.copy(), data=d)
 result = pd.merge(left=data1,right=data3,on='Subject')
 result = pd.merge(left=result,right=data2,on='Subject')
 

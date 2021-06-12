@@ -34,11 +34,12 @@ data3 = df2['Age'][sub_clinical_ids]
 data3.index = sub_ids # Change the index to the subject id
 data3.index.name = 'Subject'
 
+"""
 data4 = data3.copy()
 data4[:] = gord_fname_list
 data4.index.name = 'Filename'
-
-d={'FileNames':gord_fname_list}
+"""
+d={'FileName':gord_fname_list}
 data4 = pd.DataFrame(index=data2.index.copy(), data=d)
 result = pd.merge(left=data1, right=data3, on='Subject')
 result = pd.merge(left=result, right=data2, on='Subject')

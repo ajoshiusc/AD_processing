@@ -42,7 +42,7 @@ d={'FileNames':gord_fname_list}
 data4 = pd.DataFrame(index=data2.index.copy(), data=d)
 result = pd.merge(left=data1, right=data3, on='Subject')
 result = pd.merge(left=result, right=data2, on='Subject')
-#result = pd.merge(left=result, right=data4, on='Subject')
+result = pd.merge(left=result, right=data4, on='Subject')
 
 
 print(result)

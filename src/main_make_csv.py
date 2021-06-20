@@ -11,7 +11,7 @@ sub_clinical_ids = list()
 gord_fname_list = list()
 
 for n in range(len(s)):
-    gord_fname = os.path.join('/deneb_disk/bfp_oasis3', s[n],'func',s[n]+'_rest_bold.32k.GOrd.filt.mat')
+    gord_fname = os.path.join('/deneb_disk/bfp_oasis3', s[n],'func',s[n]+'_rest_bold.32k.GOrd.mat')
 
     if os.path.exists(gord_fname):
         sub_ids.append(s[n][4:12])
@@ -50,7 +50,7 @@ print(result)
 
 result.rename(columns={'M/F':'Gender', "UDS B9: Clin. Judgements":'UDSB9'},inplace=True)
 
-result.to_csv('oasis3_bfp.csv')
+result.to_csv('oasis3_bfp_SCT.csv')
 
 print('done')
 

@@ -54,11 +54,11 @@ def main():
     t0 = time.time()
     print('performing stats based on random pairwise distances')
 
-    corr_pval_max, corr_pval_fdr = randpairs_regression(
+    corr_pval_max, corr_pval_fdr, rho, power, effect, estN = randpairs_regression(
         bfp_path=BFPPATH,
         sub_files=sub_files,
         reg_var=reg_var,
-        num_pairs=20000,  # 19900,
+        num_pairs=20,  # 19900,
         nperm=2000,
         len_time=LEN_TIME,
         num_proc=6,
@@ -69,7 +69,8 @@ def main():
     sp.savez(
         'pval_num_pairs20000_nsub350_nperm2000.npz',
         corr_pval_max=corr_pval_max,
-        corr_pval_fdr=corr_pval_fdr)
+        corr_pval_fdr=corr_pval_fdr,
+        rho=rho, power=power, effect=effect, estN=estN)
     # corr_pval_max=a['corr_pval_max']
     # corr_pval_fdr=a['corr_pval_fdr']
     vis_grayord_sigpval(

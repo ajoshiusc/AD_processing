@@ -33,7 +33,7 @@ from dfsio import readdfs, writedfs
 #from stats.main_lin_regression_simulation import NUM_SUB
 from surfproc import patch_color_attrib, smooth_surf_function
 from sklearn.kernel_ridge import KernelRidge as KRR
-
+from statsmodels.stats.power import NormalIndPower
 # if VTK_INSTALLED:
 #    from surfproc import view_patch_vtk, smooth_patch
 
@@ -327,14 +327,16 @@ def corr_pearson_fdr(X_pairs, Y_pairs, reg_var, num_sub, nperm=1000):
     num_vert = X.shape[1]
 
     corr_pval = np.zeros(num_vert)
+    rho = np.zeros(num_vert)
+
     for ind in tqdm(range(num_vert)):
-        _, corr_pval[ind] = sp.stats.pearsonr(X[:, ind], Y.squeeze())
+        rho, corr_pval[ind] = sp.stats.pearsonr(X[:, ind], Y.squeeze())
 
     corr_pval[np.isnan(corr_pval)] = .5
 
     _, corr_pval_fdr = fdrcorrection(corr_pval)
 
-    return corr_pval_fdr, corr_pval
+    return corr_pval_fdr, corr_pval, rho
 
 
 def corr_perm_test(X_pairs, Y_pairs, reg_var, num_sub, nperm=1000):
@@ -367,7 +369,7 @@ def corr_perm_test(X_pairs, Y_pairs, reg_var, num_sub, nperm=1000):
 
     _, pval_perm_fdr = fdrcorrection(pval_perm)
 
-    return pval_max, pval_perm_fdr, pval_perm
+    return pval_max, pval_perm_fdr, pval_perm, rho_orig
 
 
 '''
@@ -912,10 +914,19 @@ def kernel_regression_ftest_permutation(bfp_path,
 
     return pval_kr_ftest, pval_kr_ftest_fdr
 
-def pearson_rho2power(r, alpha=0.05):
+def pearson_rho2power(r, N, alpha=0.05, power_needed=0.8):
     # based on power calculations here: https://www2.ccrb.cuhk.edu.hk/stat/other/correlation.htm
-    
+    C = 0.5*np.log((1+r)/(1-r))
+    z = C*np.sqrt(N-3)
+    analysis = NormalIndPower()
+    pwr = np.zeros(len(z))
+    estN = np.zeros(len(z))
 
+    for i in tqdm(range(len(z))):
+        pwr[i] = analysis.power(z[i], nobs1=N, ratio=0, alpha=0.05)
+      #  estN[i] = analysis.solve_power(z[i], nobs1=None, ratio=0, alpha=0.05, power=power_needed)
+
+    return pwr, z, estN
 
 
 
@@ -968,14 +979,14 @@ def randpairs_regression(bfp_path,
     corr_pval2 = 0
     if not pearson_fdr_test:
         print('Performing Permutation test with MAX statistic')
-        corr_pval, corr_pval2, _ = corr_perm_test(X_pairs=fmri_diff.T,
+        corr_pval, corr_pval2, _, rho = corr_perm_test(X_pairs=fmri_diff.T,
                                                   Y_pairs=regvar_diff,
                                                   reg_var=reg_var,
                                                   num_sub=len(sub_files),
                                                   nperm=nperm)
     else:
         print('Performing Pearson correlation with FDR testing')
-        corr_pval, corr_pval2 = corr_pearson_fdr(X_pairs=fmri_diff.T,
+        corr_pval, corr_pval2, rho = corr_pearson_fdr(X_pairs=fmri_diff.T,
                                                  Y_pairs=regvar_diff,
                                                  reg_var=reg_var,
                                                  num_sub=len(sub_files),
@@ -991,7 +1002,9 @@ def randpairs_regression(bfp_path,
     if len(corr_pval) == len(labs):
         corr_pval[labs == 0] = 0.5
 
-    return corr_pval, corr_pval2
+    power, effect, estN = pearson_rho2power(rho, len(sub_files))
+    
+    return corr_pval, corr_pval2, rho, power, effect, estN 
 
 
 def randpairs_regression_simulation(bfp_path,

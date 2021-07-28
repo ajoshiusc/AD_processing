@@ -34,6 +34,7 @@ from dfsio import readdfs, writedfs
 from surfproc import patch_color_attrib, smooth_surf_function
 from sklearn.kernel_ridge import KernelRidge as KRR
 from statsmodels.stats.power import NormalIndPower
+from statistics import NormalDist
 # if VTK_INSTALLED:
 #    from surfproc import view_patch_vtk, smooth_patch
 
@@ -925,6 +926,12 @@ def pearson_rho2power(r, N, alpha=0.05, power_needed=0.8):
     for i in tqdm(range(len(z))):
         pwr[i] = analysis.power(z[i], nobs1=N, ratio=0, alpha=0.05)
       #  estN[i] = analysis.solve_power(z[i], nobs1=None, ratio=0, alpha=0.05, power=power_needed)
+    
+    
+    z_a = NormalDist().inv_cdf(alpha)
+    z_b = NormalDist().inv_cdf(1-power_needed)
+    estN = ((z_a + z_b)/(C + 1e-6))**2 + 3
+
 
     return pwr, z, estN
 

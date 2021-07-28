@@ -58,7 +58,7 @@ def main():
         bfp_path=BFPPATH,
         sub_files=sub_files,
         reg_var=reg_var,
-        num_pairs=20,  # 19900,
+        num_pairs=20000,  # 19900,
         nperm=2000,
         len_time=LEN_TIME,
         num_proc=6,
@@ -66,7 +66,7 @@ def main():
     t1 = time.time()
 
     print(t1 - t0)
-    sp.savez(
+    np.savez(
         'pval_num_pairs20000_nsub350_nperm2000.npz',
         corr_pval_max=corr_pval_max,
         corr_pval_fdr=corr_pval_fdr,

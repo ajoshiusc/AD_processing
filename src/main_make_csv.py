@@ -1,5 +1,3 @@
-#||AUM||
-#||Shree Ganeshaya Namaha||
 import csv
 import os
 import pandas as pd
@@ -22,8 +20,8 @@ print(sub_ids)
 
 
 
-csvname1 = '/ImagePTE1/ajoshi/code_farm/AD_processing/oasis3_clinical_data.csv'
-csvname2 = '/ImagePTE1/ajoshi/code_farm/AD_processing/oasis3_MR_scans.csv'
+csvname1 = '../oasis3_clinical_data.csv'
+csvname2 = '../oasis3_MR_scans.csv'
 
 df1 = pd.read_csv(csvname1,index_col='Subject')
 df2 = pd.read_csv(csvname2,index_col='Label')
@@ -50,7 +48,7 @@ print(result)
 
 result.rename(columns={'M/F':'Gender', "UDS B9: Clin. Judgements":'UDSB9'},inplace=True)
 
-result.to_csv('oasis3_bfp_SCT.csv')
+result.to_csv('oasis3_bfp_UDSB9_GOrd.csv')
 
 print('done')
 

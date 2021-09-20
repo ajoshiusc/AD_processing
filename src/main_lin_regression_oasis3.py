@@ -39,7 +39,7 @@ def main():
 
     for i in range(len(s)):
 
-        measure = s[i][51:-4]
+        measure = s[i][57:-4]
         CSV_FILE = s[i]
 
         print('Reading subjects')

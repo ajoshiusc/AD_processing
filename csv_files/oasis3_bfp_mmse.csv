@@ -1,4 +1,4 @@
-Subject,Gender,Age,0,FileName
+Subject,Gender,Age,mmse,FileName
 OAS30551,F,64.0,29.0,/deneb_disk/bfp_oasis3/sub-OAS30551_ses-d0104_run_02/func/sub-OAS30551_ses-d0104_run_02_rest_bold.32k.GOrd.mat
 OAS30746,F,75.0,29.0,/deneb_disk/bfp_oasis3/sub-OAS30746_ses-d0035_run_02/func/sub-OAS30746_ses-d0035_run_02_rest_bold.32k.GOrd.mat
 OAS31078,F,52.0,30.0,/deneb_disk/bfp_oasis3/sub-OAS31078_ses-d0027_run_02/func/sub-OAS31078_ses-d0027_run_02_rest_bold.32k.GOrd.mat

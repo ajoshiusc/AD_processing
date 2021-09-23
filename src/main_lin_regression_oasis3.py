@@ -22,7 +22,6 @@ BFPPATH = '/home/ajoshi/projects/bfp'
 FSL_PATH = '/usr/share/fsl/5.0'
 # study directory where all the grayordinate files lie
 DATA_DIR = '/deneb_disk/bfp_oasis3'
-CSV_FILE = '/home/ajoshi/projects/AD_processing/src/oasis3_bfp.csv'
 
 # ### Read CSV file to read the group IDs. This study has three subgroups:
 # 1. Normal controls,

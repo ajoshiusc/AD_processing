@@ -24,7 +24,7 @@ print(sub_ids)
 
 csvname1 = '../ADRC_Clinical_Data_aajoshi_5_14_2021_1_47_36.csv'
 csvname2 = '../oasis3_MR_scans.csv'
-measure = 'mmse'
+measure = 'cdr'
 measure_short = measure.replace('.', '').replace(' ', '').replace(':', '_')
 
 df1 = pd.read_csv(csvname1, index_col='Subject')
@@ -33,7 +33,7 @@ data1 = df2['M/F'][sub_mr_ids]
 data1.index = sub_ids  # Change the index to the subject id
 data1.index.name = 'Subject'
 
-data2_values = {'mmse': [np.mean(df1[measure][s]) for s in sub_ids]}
+data2_values = {measure: [np.mean(df1[measure][s]) for s in sub_ids]}
 data2 = pd.DataFrame(index=sub_ids, data=data2_values)
 data2.index.name = 'Subject'
 

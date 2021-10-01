@@ -17,6 +17,7 @@ from grayord_utils import visdata_grayord, vis_grayord_sigpval
 from tqdm import tqdm
 import time
 import glob
+import scipy as sp
 
 BFPPATH = '/home/ajoshi/projects/bfp'
 FSL_PATH = '/usr/share/fsl/5.0'
@@ -50,9 +51,10 @@ def main():
 
         # Shuffle reg_var and subjects for testing
         #reg_var = sp.random.permutation(reg_var)
+        
         #ran_perm = sp.random.permutation(len(reg_var))
         #reg_var = reg_var
-        #sub_files = [sub_files[i] for i in range(len(reg_var))]
+        #sub_files = [sub_files[i] for i in ran_perm]
 
         sub_files = sub_files
         reg_var = reg_var
@@ -71,7 +73,7 @@ def main():
         t1 = time.time()
 
         print(t1 - t0)
-        np.savez('pval_num_pairs20000_nsub350_nperm2000_' + measure + '.npz',
+        np.savez('pval_num_pairs20000_nsub350_nperm2000_' + measure + '_perm.npz',
                  corr_pval_max=corr_pval_max,
                  corr_pval_fdr=corr_pval_fdr,
                  rho=rho,

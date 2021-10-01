@@ -31,52 +31,15 @@ CSV_FILE = '/home/ajoshi/projects/AD_processing/src/oasis3_bfp.csv'
 LEN_TIME = 164  # length of the time series
 NUM_SUB = 350  # Number of subjects for the study
 
+measure = 'mmse'
+
 
 def main():
 
     print('Reading subjects')
-    '''
-    _, reg_var, sub_files = read_oasis3_data(
-        csv_fname=CSV_FILE,
-        data_dir=DATA_DIR,
-        reg_var_name='UDSB9',  #'Verbal IQ',  #  #
-        num_sub=NUM_SUB,
-        len_time=LEN_TIME)
-    '''
-    # Shuffle reg_var and subjects for testing
-    #reg_var = sp.random.permutation(reg_var)
-    #ran_perm = sp.random.permutation(len(reg_var))
-    #reg_var = reg_var
-    #sub_files = [sub_files[i] for i in range(len(reg_var))]
 
-    
-    #sub_files=sub_files #[50:100]
-    
-    #reg_var = reg_var #[50:100]
-    '''
-    t0 = time.time()
-    print('performing stats based on random pairwise distances')
-    
-    
-    corr_pval_max, corr_pval_fdr, rho, power, effect, estN = randpairs_regression(
-        bfp_path=BFPPATH,
-        sub_files=sub_files,
-        reg_var=reg_var,
-        num_pairs=20,  # 19900,
-        nperm=2000,
-        len_time=LEN_TIME,
-        num_proc=6,
-        pearson_fdr_test=False)
-    t1 = time.time()
+    a = np.load('pval_num_pairs20000_nsub350_nperm2000_' + measure + '.npz')
 
-    print(t1 - t0)
-    '''
-    
-    a = np.load(
-        'pval_num_pairs20000_nsub350_nperm2000.npz')
-    #        corr_pval_max=corr_pval_max,
-    #        corr_pval_fdr=corr_pval_fdr,
-    #       rho=rho, power=power, effect=effect, estN=estN)
     power = a['power']
     rho = a['rho']
     effect = a['effect']
@@ -86,16 +49,18 @@ def main():
 
     # corr_pval_max=a['corr_pval_max']
     # corr_pval_fdr=a['corr_pval_fdr']
-    vis_grayord_sigpval(
-        corr_pval_max,
-        surf_name='rand_dist_corr_perm_pairs20000_max',
-        out_dir='.',
-        smooth_iter=1000,
-        bfp_path=BFPPATH,
-        fsl_path=FSL_PATH,
-        sig_alpha=0.05)
+    corr_pval_max = corr_pval_max
+    vis_grayord_sigpval(corr_pval_max,
+                        surf_name='corr_perm_pairs20000_max_' +
+                        measure,
+                        out_dir='.',
+                        smooth_iter=1000,
+                        bfp_path=BFPPATH,
+                        fsl_path=FSL_PATH,
+                        sig_alpha=0.05)
     vis_grayord_sigpval(corr_pval_fdr,
-                        surf_name='rand_dist_corr_perm_pairs20000_fdr',
+                        surf_name='corr_perm_pairs20000_fdr' +
+                        measure,
                         out_dir='.',
                         smooth_iter=1000,
                         bfp_path=BFPPATH,
@@ -103,7 +68,7 @@ def main():
                         sig_alpha=0.05)
 
     visdata_grayord(rho,
-                    surf_name='rand_dist_corr_perm_pairs20000_rho',
+                    surf_name='corr_perm_pairs20000_rho' + measure,
                     out_dir='.',
                     smooth_iter=1000,
                     colorbar_lim=[-0.1, 0.1],
@@ -113,7 +78,8 @@ def main():
                     fsl_path=FSL_PATH)
 
     visdata_grayord(effect,
-                    surf_name='rand_dist_corr_perm_pairs20000_effect',
+                    surf_name='corr_perm_pairs20000_effect' +
+                    measure,
                     out_dir='.',
                     smooth_iter=1000,
                     colorbar_lim=[-1, 1],
@@ -122,7 +88,7 @@ def main():
                     bfp_path=BFPPATH,
                     fsl_path=FSL_PATH)
     visdata_grayord(power,
-                    surf_name='rand_dist_corr_perm_pairs20000_power',
+                    surf_name='corr_perm_pairs20000_power' + measure,
                     out_dir='.',
                     smooth_iter=1000,
                     colorbar_lim=[0.95, 1],
@@ -132,7 +98,7 @@ def main():
                     fsl_path=FSL_PATH)
 
     visdata_grayord(estN,
-                    surf_name='rand_dist_corr_perm_pairs20000_estN',
+                    surf_name='corr_perm_pairs20000_estN' + measure,
                     out_dir='.',
                     smooth_iter=1000,
                     colorbar_lim=[0, 1000],

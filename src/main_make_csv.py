@@ -24,7 +24,7 @@ print(sub_ids)
 
 csvname1 = '../ADRC_Clinical_Data_aajoshi_5_14_2021_1_47_36.csv'
 csvname2 = '../oasis3_MR_scans.csv'
-measure = 'cdr'
+measure = 'mmse'
 measure_short = measure.replace('.', '').replace(' ', '').replace(':', '_')
 
 df1 = pd.read_csv(csvname1, index_col='Subject')

@@ -68,12 +68,12 @@ def main():
             num_pairs=20000,
             nperm=2000,
             len_time=LEN_TIME,
-            num_proc=6,
+            num_proc=40,
             pearson_fdr_test=False)
         t1 = time.time()
 
         print(t1 - t0)
-        np.savez('pval_num_pairs20000_nsub350_nperm2000_' + measure + '_perm.npz',
+        np.savez('pval_num_pairs20000_nsub350_nperm2000_' + measure + '.npz',
                  corr_pval_max=corr_pval_max,
                  corr_pval_fdr=corr_pval_fdr,
                  rho=rho,

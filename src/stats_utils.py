@@ -340,6 +340,41 @@ def corr_pearson_fdr(X_pairs, Y_pairs, reg_var, num_sub, nperm=1000):
     return corr_pval_fdr, corr_pval, rho
 
 
+
+def corr_perm_test_perm_sub(X_pairs, Y_pairs, reg_var, pairs, nperm=1000):
+    # X: nsub x vertices
+    # Y: cognitive scores nsub X 1
+    pairs = np.array(pairs)
+
+    X, _, _ = normalizeData(X_pairs)
+
+    num_pairs = X.shape[0]
+    Y_pairs, _, _ = normalizeData(Y_pairs[:, None])
+    rho_orig = np.sum(X * Y_pairs, axis=0)
+    max_null = np.zeros(nperm)
+    n_count = np.zeros(X.shape[1])
+
+    print('Permutation testing')
+    for ind in tqdm(range(nperm)):
+        reg_var_perm = sp.random.permutation(reg_var)
+        #pairs, _ = gen_rand_pairs(num_sub=num_sub, num_pairs=num_pairs)
+        #pairs = np.array(pairs)
+        Y = sp.square(reg_var_perm[pairs[:, 0]] - reg_var_perm[pairs[:, 1]])
+
+        Y, _, _ = normalizeData(Y[:, None])
+
+        rho_perm = np.sum(X * Y, axis=0)
+        max_null[ind] = np.amax(rho_perm)
+        n_count += np.float32(rho_perm >= rho_orig)
+
+    pval_max = np.sum(rho_orig[:, None] <= max_null[None, :], axis=1) / nperm
+
+    pval_perm = n_count / nperm
+
+    _, pval_perm_fdr = fdrcorrection(pval_perm)
+
+    return pval_max, pval_perm_fdr, pval_perm, rho_orig
+
 def corr_perm_test(X_pairs, Y_pairs, reg_var, num_sub, nperm=1000):
     # X: nsub x vertices
     # Y: cognitive scores nsub X 1
@@ -577,9 +612,7 @@ def kernel_regression(bfp_path,
 
     if simulation:
         # added for simulation
-        labs = spio.loadmat(
-            '/ImagePTE1/ajoshi/code_farm/bfp/supp_data/USCLobes_grayordinate_labels.mat'
-        )['labels']
+        labs = spio.loadmat(bfp_path + '/supp_data/USCLobes_grayordinate_labels.mat')['labels']
         roi = (labs == 200)  # R. Parietal Lobe
 
     # Normalize the variable
@@ -968,7 +1001,7 @@ def randpairs_regression(bfp_path,
                     data_field=data_field), pairs)
 
         ind = 0
-        for res in results:
+        for res in tqdm(results):
             fmri_diff[:, ind] = res[0]
             regvar_diff[ind] = res[1]
             ind += 1
@@ -986,10 +1019,10 @@ def randpairs_regression(bfp_path,
     corr_pval2 = 0
     if not pearson_fdr_test:
         print('Performing Permutation test with MAX statistic')
-        corr_pval, corr_pval2, _, rho = corr_perm_test(X_pairs=fmri_diff.T,
+        corr_pval, corr_pval2, _, rho = corr_perm_test_perm_sub(X_pairs=fmri_diff.T,
                                                   Y_pairs=regvar_diff,
                                                   reg_var=reg_var,
-                                                  num_sub=len(sub_files),
+                                                  pairs=pairs,
                                                   nperm=nperm)
     else:
         print('Performing Pearson correlation with FDR testing')

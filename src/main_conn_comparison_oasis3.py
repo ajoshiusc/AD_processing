@@ -69,21 +69,19 @@ def main():
         #reg_var = reg_var
         #sub_files = [sub_files[i] for i in ran_perm]
 
-        sub_files = sub_files
-        reg_var = reg_var
+        cdr = reg_var
 
         for sind, f in enumerate(sub_files):
             sub1_data = spio.loadmat(f)['dtseries'].T
 
             for i, r in enumerate(rois):
-                dtseries[:,i] = np.mean(sub1_data[:LEN_TIME, np.nonzero(labs==r)],axis=1)
+                dtseries[:,i] = np.mean(sub1_data[:LEN_TIME, np.where(labs==r)[0]],axis=1)
             
             sub1_data, _, _ = normalizeData(dtseries)
 
-            conn_mat[:,:,sind] = sub1_data.T ** sub1_data 
+            conn_mat[:,:,sind] = np.matmul(sub1_data.T, sub1_data)
 
-        print('performing stats based on random pairwise distances')
-
+    np.savez('AD_conn', conn_mat = conn_mat, cdr=cdr)
     print('Results saved')
 
 

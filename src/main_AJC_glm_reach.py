@@ -38,7 +38,7 @@ mean_img = mean_img(fmri_img)
 # provided in an events.tsv file. The path of this file is
 # provided in the dataset.
 import pandas as pd
-events = pd.read_table(subject_data['events'])
+events = pd.read_table('/ImagePTE1/ajoshi/code_farm/AD_processing/src/ajc_events.tsv')
 events
 
 ###############################################################################
@@ -58,7 +58,7 @@ from nilearn.glm.first_level import FirstLevelModel
 # * hrf_model='spm' means that we rely on the SPM "canonical hrf" model (without time or dispersion derivatives)
 # * drift_model='cosine' means that we model the signal drifts as slow oscillating time functions
 # * high_pass=0.01(Hz) defines the cutoff frequency (inverse of the time period).
-fmri_glm = FirstLevelModel(t_r=7,
+fmri_glm = FirstLevelModel(t_r=.75,
                            noise_model='ar1',
                            standardize=False,
                            hrf_model='spm',
@@ -119,10 +119,10 @@ plt.show()
 
 from numpy import array
 conditions = {
-    'active': array([1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-                     0.]),
-    'rest':   array([0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
-                     0.]),
+    'active': array([1., 0., 0., 0., 0., 0.]), #, 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+                    # 0.]),
+    'rest':   array([0., 1., 0., 0., 0., 0.]), #, 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+                   #  0.]),
 }
 
 ###############################################################################

@@ -8,8 +8,8 @@ class Subject_Data:
 
 subject_data = Subject_Data()
 
-subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/Motor_MRI/10-22-2021/3t_2021-10-22_15-48/021_L_reach_A__P/20211022_154827LreachAPs021a001.nii.gz' # print the list of names of functional images
-subject_data.anat = '/ImagePTE1/ajoshi/for_abhijit/Motor_MRI/10-22-2021/3t_2021-10-22_15-48/002_T1_085_224sl/co20211022_154827T1085224sls002a1001.nii.gz'
+#subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_016_left_finger_bold.ro.nii.gz'
+subject_data.anat = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/standard.nii.gz'
 
 ###############################################################################
 # We can display the first functional image and the subject's anatomy:
@@ -59,8 +59,8 @@ from nilearn.glm.first_level import FirstLevelModel
 # * drift_model='cosine' means that we model the signal drifts as slow oscillating time functions
 # * high_pass=0.01(Hz) defines the cutoff frequency (inverse of the time period).
 fmri_glm = FirstLevelModel(t_r=.75,
-                           noise_model='ar1',
-                           standardize=False,
+                           noise_model='ar1',smoothing_fwhm=3,
+                           standardize=True,
                            hrf_model='spm',
                            drift_model='cosine',
                            high_pass=.01)
@@ -119,9 +119,9 @@ plt.show()
 
 from numpy import array
 conditions = {
-    'active': array([1., 0., 0., 0., 0., 0.]), #, 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+    'active': array([1., 0., 0., 0., 0., 0.]),#0,0,0,0,0,0,0,0,0,0,0,0]), #, 0., 0., 0., 0., 0., 0., 0., 0., 0.,
                     # 0.]),
-    'rest':   array([0., 1., 0., 0., 0., 0.]), #, 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+    'rest':   array([0., 1., 0., 0., 0., 0.]),#,0,0,0,0,0,0,0,0,0,0,0,0]), #, 0., 0., 0., 0., 0., 0., 0., 0., 0.,
                    #  0.]),
 }
 
@@ -165,7 +165,7 @@ z_map = fmri_glm.compute_contrast(active_minus_rest,
 # see later how to use corrected thresholds. We will show 3
 # axial views, with display_mode='z' and cut_coords=3.
 
-plot_stat_map(z_map, bg_img=mean_img, threshold=3.0,
+plot_stat_map(z_map, bg_img=subject_data.anat, threshold=3.0,
               display_mode='z', cut_coords=3, black_bg=True,
               title='Active minus Rest (Z>3)')
 plt.show()
@@ -182,7 +182,7 @@ plt.show()
 from nilearn.glm import threshold_stats_img
 _, threshold = threshold_stats_img(z_map, alpha=.001, height_control='fpr')
 print('Uncorrected p<0.001 threshold: %.3f' % threshold)
-plot_stat_map(z_map, bg_img=mean_img, threshold=threshold,
+plot_stat_map(z_map, bg_img=subject_data.anat, threshold=threshold,
               display_mode='z', cut_coords=3, black_bg=True,
               title='Active minus Rest (p<0.001)')
 plt.show()
@@ -197,7 +197,7 @@ plt.show()
 _, threshold = threshold_stats_img(
     z_map, alpha=.05, height_control='bonferroni')
 print('Bonferroni-corrected, p<0.05 threshold: %.3f' % threshold)
-plot_stat_map(z_map, bg_img=mean_img, threshold=threshold,
+plot_stat_map(z_map, bg_img=subject_data.anat, threshold=threshold,
               display_mode='z', cut_coords=3, black_bg=True,
               title='Active minus Rest (p<0.05, corrected)')
 plt.show()
@@ -210,7 +210,7 @@ plt.show()
 
 _, threshold = threshold_stats_img(z_map, alpha=.05, height_control='fdr')
 print('False Discovery rate = 0.05 threshold: %.3f' % threshold)
-plot_stat_map(z_map, bg_img=mean_img, threshold=threshold,
+plot_stat_map(z_map, bg_img=subject_data.anat, threshold=threshold,
               display_mode='z', cut_coords=3, black_bg=True,
               title='Active minus Rest (fdr=0.05)')
 plt.show()
@@ -224,7 +224,7 @@ plt.show()
 
 clean_map, threshold = threshold_stats_img(
     z_map, alpha=.05, height_control='fdr', cluster_threshold=10)
-plot_stat_map(clean_map, bg_img=mean_img, threshold=threshold,
+plot_stat_map(clean_map, bg_img=subject_data.anat, threshold=threshold,
               display_mode='z', cut_coords=3, black_bg=True,
               title='Active minus Rest (fdr=0.05), clusters > 10 voxels')
 plt.show()
@@ -279,7 +279,7 @@ z_map = fmri_glm.compute_contrast(effects_of_interest,
 
 clean_map, threshold = threshold_stats_img(
     z_map, alpha=.05, height_control='fdr', cluster_threshold=10)
-plot_stat_map(clean_map, bg_img=mean_img, threshold=threshold,
+plot_stat_map(clean_map, bg_img=subject_data.anat, threshold=threshold,
               display_mode='z', cut_coords=3, black_bg=True,
               title='Effects of interest (fdr=0.05), clusters > 10 voxels')
 plt.show()

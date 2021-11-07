@@ -9,6 +9,10 @@ class Subject_Data:
 subject_data = Subject_Data()
 
 #subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_016_left_finger_bold.ro.nii.gz'
+#subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_016_left_finger_bold.mc.nii.gz'
+#subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_025_resting_bold.mc.nii.gz'
+subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_021_L_reach_bold.mc.nii.gz'
+#subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_019_R_reach_bold.mc.nii.gz'
 subject_data.anat = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/standard.nii.gz'
 
 ###############################################################################
@@ -163,11 +167,11 @@ z_map = fmri_glm.compute_contrast(active_minus_rest,
 # functional image of the series (could be the anatomical image of the
 # subject).  We use arbitrarily a threshold of 3.0 in z-scale. We'll
 # see later how to use corrected thresholds. We will show 3
-# axial views, with display_mode='z' and cut_coords=3.
+# axial views, with display_mode='z' and cut_coords=4.
 
 plot_stat_map(z_map, bg_img=subject_data.anat, threshold=3.0,
-              display_mode='z', cut_coords=3, black_bg=True,
-              title='Active minus Rest (Z>3)')
+              display_mode='z', cut_coords=4, black_bg=True,
+              title='Active minus Rest (cut_coords=4Z>4)')
 plt.show()
 
 ###############################################################################
@@ -183,7 +187,7 @@ from nilearn.glm import threshold_stats_img
 _, threshold = threshold_stats_img(z_map, alpha=.001, height_control='fpr')
 print('Uncorrected p<0.001 threshold: %.3f' % threshold)
 plot_stat_map(z_map, bg_img=subject_data.anat, threshold=threshold,
-              display_mode='z', cut_coords=3, black_bg=True,
+              display_mode='z', cut_coords=4, black_bg=True,
               title='Active minus Rest (p<0.001)')
 plt.show()
 
@@ -198,7 +202,7 @@ _, threshold = threshold_stats_img(
     z_map, alpha=.05, height_control='bonferroni')
 print('Bonferroni-corrected, p<0.05 threshold: %.3f' % threshold)
 plot_stat_map(z_map, bg_img=subject_data.anat, threshold=threshold,
-              display_mode='z', cut_coords=3, black_bg=True,
+              display_mode='z', cut_coords=4, black_bg=True,
               title='Active minus Rest (p<0.05, corrected)')
 plt.show()
 
@@ -211,7 +215,7 @@ plt.show()
 _, threshold = threshold_stats_img(z_map, alpha=.05, height_control='fdr')
 print('False Discovery rate = 0.05 threshold: %.3f' % threshold)
 plot_stat_map(z_map, bg_img=subject_data.anat, threshold=threshold,
-              display_mode='z', cut_coords=3, black_bg=True,
+              display_mode='z', cut_coords=4, black_bg=True,
               title='Active minus Rest (fdr=0.05)')
 plt.show()
 
@@ -225,7 +229,7 @@ plt.show()
 clean_map, threshold = threshold_stats_img(
     z_map, alpha=.05, height_control='fdr', cluster_threshold=10)
 plot_stat_map(clean_map, bg_img=subject_data.anat, threshold=threshold,
-              display_mode='z', cut_coords=3, black_bg=True,
+              display_mode='z', cut_coords=4, black_bg=True,
               title='Active minus Rest (fdr=0.05), clusters > 10 voxels')
 plt.show()
 
@@ -280,7 +284,7 @@ z_map = fmri_glm.compute_contrast(effects_of_interest,
 clean_map, threshold = threshold_stats_img(
     z_map, alpha=.05, height_control='fdr', cluster_threshold=10)
 plot_stat_map(clean_map, bg_img=subject_data.anat, threshold=threshold,
-              display_mode='z', cut_coords=3, black_bg=True,
+              display_mode='z', cut_coords=4, black_bg=True,
               title='Effects of interest (fdr=0.05), clusters > 10 voxels')
 plt.show()
 

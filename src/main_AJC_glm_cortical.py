@@ -8,17 +8,25 @@ from brainsync import normalizeData, brainSync
 from grayord_utils import visdata_grayord, vis_grayord_sigpval
 
 
-
+out_png = 'sub3_corr_tap'
 class Subject_Data:
     pass
 
 subject_data = Subject_Data()
 
-#subject_data.gord = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_016_L_tap_bold.32k.GOrd.mat'
+#subject_data.rest = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_025_resting_bold.32k.GOrd.filt.mat'
+#subject_data.gord = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_016_L_tap_bold.32k.GOrd.filt.mat'
 #subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_016_L_tap_bold.gms2standard.nii.gz'
 
-subject_data.gord = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_009_L_pen_minimal_bold.32k.GOrd.mat'
-subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_009_L_pen_minimal_bold.gms2standard.nii.gz'
+subject_data.rest = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_012_rest_minimal_bold.32k.GOrd.mat'
+#subject_data.gord = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_009_L_pen_minimal_bold.32k.GOrd.mat'
+#subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_009_L_pen_minimal_bold.gms2standard.nii.gz'
+subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_005_L_tap_minimal_bold.gms2standard.nii.gz'
+subject_data.gord = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_005_L_tap_minimal_bold.32k.GOrd.mat'
+#subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_007_L_reach_minimal_bold.gms2standard.nii.gz'
+#subject_data.gord = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_007_L_reach_minimal_bold.32k.GOrd.mat'
+
+
 
 from nilearn.image import concat_imgs, mean_img
 fmri_img = concat_imgs(subject_data.func)
@@ -89,7 +97,7 @@ BFPPATH = '/ImagePTE1/ajoshi/code_farm/bfp'
 FSL_PATH = '/usr/share/fsl/5.0'
 
 visdata_grayord(rho, # - 1000*(1.-rejected),
-                surf_name='sub3_corr_pen',
+                surf_name=out_png,
                 out_dir='.',
                 smooth_iter=1000,
                 colorbar_lim=[-1, 1],
@@ -97,6 +105,44 @@ visdata_grayord(rho, # - 1000*(1.-rejected),
                 save_png=True,
                 bfp_path=BFPPATH,
                 fsl_path=FSL_PATH)
+
+
+
+
+rdata = spio.loadmat(subject_data.rest)['dtseries'].T
+rdata, _, _ = normalizeData(rdata)
+
+
+#Matched filter
+rdata2, _ = brainSync(fdata,rdata[:fdata.shape[0],:])
+fdata = fdata - rdata2
+fdata, _, _ = normalizeData(fdata)
+
+
+rho = np.zeros(fdata.shape[1])
+pval = np.zeros(fdata.shape[1])
+
+for i in tqdm(range(fdata.shape[1])):
+    rho[i], pval[i] = pearsonr(fdata[:,i],e_haemo)
+
+
+from statsmodels.stats.multitest import fdrcorrection
+rejected, pval_fdr = fdrcorrection(pval,alpha=0.01)
+
+
+BFPPATH = '/ImagePTE1/ajoshi/code_farm/bfp'
+FSL_PATH = '/usr/share/fsl/5.0'
+
+visdata_grayord(rho, # - 1000*(1.-rejected),
+                surf_name=out_png+'matched',
+                out_dir='.',
+                smooth_iter=1000,
+                colorbar_lim=[-1, 1],
+                colormap='jet',
+                save_png=True,
+                bfp_path=BFPPATH,
+                fsl_path=FSL_PATH)
+
 
 
 

@@ -12,9 +12,10 @@ subject_data = Subject_Data()
 #subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_016_left_finger_bold.mc.nii.gz'
 #subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_024_L_pen_bold.gms2standard.nii.gz'
 #subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_016_L_tap_bold.gms2standard.nii.gz'
-subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_021_L_reach_A_P_bold.gms2standard.nii.gz'
-#subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_019_R_reach_bold.mc.nii.gz'
-subject_data.anat = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/standard.nii.gz'
+#subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_007_L_reach_minimal_bold.gms2standard.nii.gz'
+#subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_005_L_tap_minimal_bold.gms2standard.nii.gz'
+subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_009_L_pen_minimal_bold.gms2standard.nii.gz'
+subject_data.anat = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/standard.nii.gz'
 
 ###############################################################################
 # We can display the first functional image and the subject's anatomy:
@@ -124,9 +125,9 @@ plt.show()
 
 from numpy import array
 conditions = {
-    'active': array([1., 0., 0., 0., 0., 0.]),#0,0,0,0,0,0,0,0,0,0,0,0]), #, 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+    'active': array([1., 0., 0., 0., 0.]),#0,0,0,0,0,0,0,0,0,0,0,0]), #, 0., 0., 0., 0., 0., 0., 0., 0., 0.,
                     # 0.]),
-    'rest':   array([0., 1., 0., 0., 0., 0.]),#,0,0,0,0,0,0,0,0,0,0,0,0]), #, 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+    'rest':   array([0., 1., 0., 0., 0.]),#,0,0,0,0,0,0,0,0,0,0,0,0]), #, 0., 0., 0., 0., 0., 0., 0., 0., 0.,
                    #  0.]),
 }
 

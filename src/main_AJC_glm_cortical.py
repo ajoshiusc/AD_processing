@@ -14,9 +14,11 @@ class Subject_Data:
 
 subject_data = Subject_Data()
 
-subject_data.gord = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_016_L_tap_bold.32k.GOrd.mat'
-subject_data.anat = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/standard.nii.gz'
-subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_016_L_tap_bold.gms2standard.nii.gz'
+#subject_data.gord = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_016_L_tap_bold.32k.GOrd.mat'
+#subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_016_L_tap_bold.gms2standard.nii.gz'
+
+subject_data.gord = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_009_L_pen_minimal_bold.32k.GOrd.mat'
+subject_data.func = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_009_L_pen_minimal_bold.gms2standard.nii.gz'
 
 from nilearn.image import concat_imgs, mean_img
 fmri_img = concat_imgs(subject_data.func)
@@ -68,13 +70,26 @@ fdata = spio.loadmat(subject_data.gord)['dtseries'].T
 
 fdata, _, _ = normalizeData(fdata)
 
-rho = np.sum(fdata * e_haemo[:,None],axis=0)
+#rho = np.sum(fdata * e_haemo[:,None],axis=0)
+from scipy.stats import pearsonr
+from tqdm import tqdm
+
+rho = np.zeros(fdata.shape[1])
+pval = np.zeros(fdata.shape[1])
+
+for i in tqdm(range(fdata.shape[1])):
+    rho[i], pval[i] = pearsonr(fdata[:,i],e_haemo)
+
+
+from statsmodels.stats.multitest import fdrcorrection
+rejected, pval_fdr = fdrcorrection(pval,alpha=0.01)
+
 
 BFPPATH = '/ImagePTE1/ajoshi/code_farm/bfp'
 FSL_PATH = '/usr/share/fsl/5.0'
 
-visdata_grayord(rho,
-                surf_name='corr_tap',
+visdata_grayord(rho, # - 1000*(1.-rejected),
+                surf_name='sub3_corr_pen',
                 out_dir='.',
                 smooth_iter=1000,
                 colorbar_lim=[-1, 1],

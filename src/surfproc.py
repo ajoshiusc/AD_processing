@@ -81,6 +81,9 @@ def patch_color_attrib(s,values=[],cmap='jet', clim=[0]):
     scalar_map = cmx.ScalarMappable(norm=color_norm, cmap=cmap)
     s.vColor = scalar_map.to_rgba(values)
     s.vColor =  s.vColor[:,:3]
+    s.vColor[np.where(values<vmin),:]=0.5
+    s.vColor[np.where(values>vmax),:]=0.5
+
     return s
 
 

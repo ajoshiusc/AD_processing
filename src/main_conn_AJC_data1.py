@@ -24,9 +24,10 @@ FSL_PATH = '/usr/share/fsl/5.0'
 
 rois = [147, 225, 373, 247, 186, 187, 188, 189, 227, 145]
 
-#fname = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_016_left_finger_bold.32k.GOrd.filt.mat'
-fname = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_025_resting_bold.32k.GOrd.filt.mat'
-#fname = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-22-2021/func/10-22-2021_021_L_reach_bold.32k.GOrd.filt.mat'
+#fname = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_012_rest_minimal_bold.32k.GOrd.mat'
+#fname = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_005_L_tap_minimal_bold.32k.GOrd.mat'
+#fname = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_007_L_reach_minimal_bold.32k.GOrd.mat'
+fname = '/ImagePTE1/ajoshi/for_abhijit/bfp_out/10-29-2021/func/10-29-2021_009_L_pen_minimal_bold.32k.GOrd.mat'
 
 def main():
 
@@ -36,20 +37,18 @@ def main():
     labs = np.mod(labs,1000)
     labs = np.squeeze(labs)
 
-    dtseries = np.zeros((LEN_TIME,len(rois)))
-    conn_mat = np.zeros((len(rois),len(rois),NUM_SUB))
-
     sub1_data = spio.loadmat(fname)['dtseries'].T
+    dtseries = np.zeros((sub1_data.shape[0],len(rois)))
 
     for i, r in enumerate(rois):
-        dtseries[:,i] = np.mean(sub1_data[:LEN_TIME, np.where(labs==r)[0]],axis=1)
+        dtseries[:,i] = np.mean(sub1_data[:, np.where(labs==r)[0]],axis=1)
     
     sub1_data, _, _ = normalizeData(dtseries)
 
     conn_mat = np.matmul(sub1_data.T, sub1_data)
 
     #np.savez('AD_conn_AJC_sub1_left_finger.npz', conn_mat = conn_mat)
-    np.savez('AD_conn_AJC_sub1_rest.npz', conn_mat = conn_mat)
+    np.savez('AD_conn_AJC_sub2_pen.npz', conn_mat = conn_mat)
 
 
 if __name__ == "__main__":

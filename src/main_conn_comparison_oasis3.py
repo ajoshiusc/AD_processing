@@ -38,17 +38,17 @@ rois = [147, 225, 373, 247, 186, 187, 188, 189, 227, 145]
 def main():
 
     s = glob.glob(
-        '/home/ajoshi/projects/AD_processing/csv_files/oasis3_bfp_cdr.csv')
+        '/home/ajoshi/projects/AD_processing/csv_files/oasis3_bfp_mmse.csv')
 
     atlas = spio.loadmat(
         '/home/ajoshi/projects/bfp/supp_data/USCBrain_grayordinate_labels.mat')
 
     labs = atlas['labels']
-    labs = np.mod(labs,1000)
+    labs = np.mod(labs, 1000)
     labs = np.squeeze(labs)
 
-    dtseries = np.zeros((LEN_TIME,len(rois)))
-    conn_mat = np.zeros((len(rois),len(rois),NUM_SUB))
+    dtseries = np.zeros((LEN_TIME, len(rois)))
+    conn_mat = np.zeros((len(rois), len(rois), NUM_SUB))
 
     for i in range(len(s)):
 
@@ -69,19 +69,19 @@ def main():
         #reg_var = reg_var
         #sub_files = [sub_files[i] for i in ran_perm]
 
-        cdr = reg_var
-
         for sind, f in enumerate(sub_files):
             sub1_data = spio.loadmat(f)['dtseries'].T
 
             for i, r in enumerate(rois):
-                dtseries[:,i] = np.mean(sub1_data[:LEN_TIME, np.where(labs==r)[0]],axis=1)
-            
+                dtseries[:, i] = np.mean(sub1_data[:LEN_TIME,
+                                                   np.where(labs == r)[0]],
+                                         axis=1)
+
             sub1_data, _, _ = normalizeData(dtseries)
 
-            conn_mat[:,:,sind] = np.matmul(sub1_data.T, sub1_data)
+            conn_mat[:, :, sind] = np.matmul(sub1_data.T, sub1_data)
 
-    np.savez('AD_conn', conn_mat = conn_mat, cdr=cdr)
+    np.savez('AD_conn', conn_mat=conn_mat, reg_var=reg_var)
     print('Results saved')
 
 

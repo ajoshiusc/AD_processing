@@ -21,6 +21,7 @@ import scipy as sp
 import matplotlib.pyplot as plt
 from scipy.stats import ttest_ind
 import itertools
+from numpy import std, mean, sqrt
 
 BFPPATH = '/home/ajoshi/projects/bfp'
 FSL_PATH = '/usr/share/fsl/5.0'
@@ -37,84 +38,87 @@ NUM_SUB = 350  # Number of subjects for the study
 
 rois = [147, 225, 373, 247, 186, 187, 188, 189, 227, 145]
 
+#correct if the population S.D. is expected to be equal for the two groups.
+def cohen_d(x,y):
+    nx = len(x)
+    ny = len(y)
+    dof = nx + ny - 2
+    return 2*np.abs(mean(x) - mean(y)) / sqrt(((nx-1)*std(x, ddof=1) ** 2 + (ny-1)*std(y, ddof=1) ** 2) / dof)
 
 def main():
 
+    afont = {'fontname':'Arial'}
+
     a = np.load('AD_conn.npz')
     conn_mat = a['conn_mat']
-    cdr=a['cdr']
+    mmse=a['reg_var']
 
-    ncind = np.where(cdr < 0.5)[0]
-    mciind = np.where((cdr > 0.5) & (cdr < 1))[0]
-    adind = np.where((cdr > 1.5))[0]
+    adind = np.where((mmse<29) & (mmse>26.5))[0]
+    ncind = np.where(mmse>29)[0]
     
     conn_NC = conn_mat[:,:,ncind]
-    conn_MCI = conn_mat[:,:,mciind]
     conn_AD = conn_mat[:,:,adind]
 
     avg_conn_NC = np.mean(conn_NC,axis=2)
-    avg_conn_MCI = np.mean(conn_MCI,axis=2)
     avg_conn_AD = np.mean(conn_AD,axis=2)
 
 
-    fig, axes = plt.subplots(nrows=1, ncols=3)
+    fig, axes = plt.subplots(nrows=1, ncols=2)
 
     ax0 = axes.flat[0]
-    im = ax0.imshow(avg_conn_NC,vmin=0, vmax=1)
-    ax0.set_title('NC')
+    im = ax0.imshow(avg_conn_NC,vmin=0, vmax=1, cmap='hot')
+    ax0.set_title('NC', fontsize=16,**afont)
+    ax0.tick_params(axis='both', which='major', labelsize=16)
     ax0.set_xticks(range(conn_mat.shape[0]))
     ax0.set_yticks(range(conn_mat.shape[1]))
 
-
-    ax1 = axes.flat[1]
-    im = ax1.imshow(avg_conn_MCI,vmin=0, vmax=1)
-    ax1.set_title('MCI')
-    ax1.set_xticks(range(conn_mat.shape[0]))
-    ax1.set_yticks(range(conn_mat.shape[1]))
-
-    ax2 = axes.flat[2]
-    im = ax2.imshow(avg_conn_AD,vmin=0, vmax=1)
-    ax2.set_title('AD')
+    ax2 = axes.flat[1]
+    im = ax2.imshow(avg_conn_AD,vmin=0, vmax=1, cmap='hot')
+    ax2.set_title('Mild AD', fontsize=16,**afont)
+    ax2.tick_params(axis='both', which='major', labelsize=16)
     ax2.set_xticks(range(conn_mat.shape[0]))
     ax2.set_yticks(range(conn_mat.shape[1]))
 
 
-    plt.colorbar(im,ax=axes.ravel().tolist())
+    cbar = plt.colorbar(im,ax=axes.ravel().tolist())
+    cbar.ax.tick_params(labelsize=16)
 
     plt.show()
 
-    p_ad_mci = np.zeros(conn_mat.shape[:2])
-    p_nc_mci = np.zeros(conn_mat.shape[:2])
+    fig, axes = plt.subplots(nrows=1, ncols=1)
+
     p_ad_nc = np.zeros(conn_mat.shape[:2])
+    d_ad_nc = np.zeros(conn_mat.shape[:2])
 
     for r,c in itertools.product(range(conn_mat.shape[0]),range(conn_mat.shape[1])):
 
-        t, p_ad_mci[r,c] = ttest_ind(conn_NC[r,c,:],conn_MCI[r,c,:])
-        t, p_nc_mci[r,c] = ttest_ind(conn_NC[r,c,:],conn_MCI[r,c,:])
-        t, p_ad_nc[r,c] = ttest_ind(conn_NC[r,c,:],conn_MCI[r,c,:])
+        t, p_ad_nc[r,c] = ttest_ind(conn_NC[r,c,:],conn_AD[r,c,:])
+        d_ad_nc[r,c] = cohen_d(conn_NC[r,c,:],conn_AD[r,c,:])
 
-
-    fig, axes = plt.subplots(nrows=1, ncols=3)
-
-    ax0 = axes.flat[0]
-    im = ax0.imshow(p_nc_mci,vmin=0, vmax=.05)
-    ax0.set_title('NC_vs_MCI')
-    ax0.set_xticks(range(conn_mat.shape[0]))
-    ax0.set_yticks(range(conn_mat.shape[1]))
-
-    ax1 = axes.flat[1]
-    im = ax1.imshow(p_ad_mci,vmin=0, vmax=.05)
-    ax1.set_title('AD_vs_MCI')
-    ax1.set_xticks(range(conn_mat.shape[0]))
-    ax1.set_yticks(range(conn_mat.shape[1]))
-
-    ax2 = axes.flat[2]
-    im = ax2.imshow(p_ad_nc,vmin=0, vmax=.05)
-    ax2.set_title('AD_vs_NC')
+    ax2 = axes
+    pval = p_ad_nc
+    im = ax2.imshow(pval,vmin=0, vmax=.05, cmap='hot_r')
+    ax2.set_title('AD_vs_NC', fontsize=16,**afont)
+    ax2.tick_params(axis='both', which='major', labelsize=16)
     ax2.set_xticks(range(conn_mat.shape[0]))
     ax2.set_yticks(range(conn_mat.shape[1]))
 
-    plt.colorbar(im,ax=axes.ravel().tolist())
+    plt.show()
+
+
+    fig, axes = plt.subplots(nrows=1, ncols=1)
+
+    ax = axes
+    im = ax.imshow(d_ad_nc,vmin=0, vmax=1, cmap='hot')
+    ax.set_title('Cohen\'s d for AD_vs_NC', fontsize=16,**afont)
+    ax.tick_params(axis='both', which='major', labelsize=16)
+
+    ax.set_xticks(range(conn_mat.shape[0]))
+    ax.set_yticks(range(conn_mat.shape[1]))
+
+
+    cbar = plt.colorbar(im,ax=axes)
+    cbar.ax.tick_params(labelsize=16)
 
     plt.show()
 

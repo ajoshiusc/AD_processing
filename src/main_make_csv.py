@@ -11,7 +11,7 @@ gord_fname_list = list()
 
 for n in range(len(s)):
     gord_fname = os.path.join('/deneb_disk/bfp_oasis3', s[n], 'func',
-                              s[n] + '_rest_bold.32k.GOrd.mat')
+                              s[n] + '_rest_bold.32k.GOrd.filt.mat')
 
     if os.path.exists(gord_fname):
         sub_ids.append(s[n][4:12])

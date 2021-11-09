@@ -176,7 +176,7 @@ def save2volgord_bci(data, out_dir, vol_name, bfp_path='.', fsl_path=FSL_PATH, d
 
 def save2volgord(data, out_dir, vol_name, bfp_path='.', fsl_path=FSL_PATH, default_value=0):
 
-    mni152path = '/deneb_disk/coding_ground/simnibs/simnibs/resources/templates/MNI152_T1_2mm_head_dil.nii.gz'
+    mni152path = '/usr/share/data/fsl-mni152-templates/MNI152_T1_2mm.nii.gz'
     #join(fsl_path, 'data/standard', 'MNI152_T1_2mm.nii.gz')
     mni2mm = load_img(mni152path)
     a = loadmat(join(bfp_path, 'supp_data', 'MNI2mm_gord_vol_coord.mat'))

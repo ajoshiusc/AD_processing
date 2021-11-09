@@ -38,7 +38,7 @@ def main():
 
     print('Reading subjects')
 
-    a = np.load('pval_num_pairs20000_nsub350_nperm2000_' + measure + '.npz')
+    a = np.load('pval_num_pairs20000_nsub_50_mmse_gt27_nperm2000_' + measure + '.npz')
 
     power = a['power']
     rho = a['rho']
@@ -71,7 +71,7 @@ def main():
                     surf_name='corr_perm_pairs20000_rho' + measure,
                     out_dir='.',
                     smooth_iter=1000,
-                    colorbar_lim=[-0.1, 0.1],
+                    colorbar_lim=[0, .1],
                     colormap='jet',
                     save_png=True,
                     bfp_path=BFPPATH,

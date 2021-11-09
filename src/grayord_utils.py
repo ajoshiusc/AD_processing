@@ -154,7 +154,7 @@ def save2volbord_bci(data, outfile, bfp_path='.', smooth_std=0):
     v2.to_filename(outfile)
 
 
-def save2volgord_bci(data, out_dir, vol_name, bfp_path='.', fsl_path=FSL_PATH, default_value=0, bst_path='/home/ajoshi/BrainSuite19b'):
+def save2volgord_bci(data, out_dir, vol_name, bfp_path='.', fsl_path=FSL_PATH, default_value=0, bst_path='/home/ajoshi/BrainSuite21a'):
 
     vol = load_img(
         join(bst_path, 'svreg', 'BCI-DNI_brain_atlas', 'BCI-DNI_brain.nii.gz'))

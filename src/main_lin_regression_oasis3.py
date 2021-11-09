@@ -35,7 +35,7 @@ NUM_SUB = 350  # Number of subjects for the study
 
 def main():
 
-    s = glob.glob('/home/ajoshi/projects/AD_processing/csv_files/*.csv')
+    s = glob.glob('/home/ajoshi/projects/AD_processing/csv_files/*mmse*.csv')
 
     for i in range(len(s)):
 
@@ -56,8 +56,14 @@ def main():
         #reg_var = reg_var
         #sub_files = [sub_files[i] for i in ran_perm]
 
-        sub_files = sub_files
-        reg_var = reg_var
+        ind = np.where(reg_var>27)[0]
+
+        ind_mapping = map(sub_files.__getitem__, ind)
+
+        sub_files = list(ind_mapping)
+        reg_var = reg_var[ind]
+        reg_var = reg_var[:50]    # 50 subjects
+        sub_files = sub_files[:50]  # 50 subjects
         t0 = time.time()
         print('performing stats based on random pairwise distances')
 
@@ -73,7 +79,7 @@ def main():
         t1 = time.time()
 
         print(t1 - t0)
-        np.savez('pval_num_pairs20000_nsub350_nperm2000_' + measure + '.npz',
+        np.savez('pval_num_pairs20000_nsub_50_mmse_gt27_nperm2000_' + measure + '.npz',
                  corr_pval_max=corr_pval_max,
                  corr_pval_fdr=corr_pval_fdr,
                  rho=rho,

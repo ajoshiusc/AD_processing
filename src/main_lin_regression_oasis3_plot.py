@@ -38,7 +38,9 @@ def main():
 
     print('Reading subjects')
 
-    a = np.load('pval_num_pairs20000_nsub_50_mmse_gt27_nperm2000_' + measure + '.npz')
+    #a = np.load('src/pval_num_pairs20000_nsub350_nperm2000_mmse_perm.npz')
+    #a = np.load('src/pval_num_pairs20000_nsub_50_mmse_gt27_nperm2000_' + measure + '.npz')
+    a = np.load('pval_num_pairs20000_mmse_all_gt27_nperm2000_' + measure + '_filt.npz')
 
     power = a['power']
     rho = a['rho']
@@ -70,8 +72,8 @@ def main():
     visdata_grayord(rho,
                     surf_name='corr_perm_pairs20000_rho' + measure,
                     out_dir='.',
-                    smooth_iter=1000,
-                    colorbar_lim=[0, .1],
+                    smooth_iter=000,
+                    colorbar_lim=[0, .04],
                     colormap='jet',
                     save_png=True,
                     bfp_path=BFPPATH,

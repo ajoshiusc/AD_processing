@@ -30,7 +30,7 @@ DATA_DIR = '/deneb_disk/bfp_oasis3'
 # 3. ADHD-inattentive.
 
 LEN_TIME = 164  # length of the time series
-NUM_SUB = 350  # Number of subjects for the study
+NUM_SUB = 3500  # Number of subjects for the study
 
 
 def main():
@@ -62,8 +62,8 @@ def main():
 
         sub_files = list(ind_mapping)
         reg_var = reg_var[ind]
-        reg_var = reg_var[:50]    # 50 subjects
-        sub_files = sub_files[:50]  # 50 subjects
+        reg_var = reg_var   # 50 subjects
+        sub_files = sub_files  # 50 subjects
         t0 = time.time()
         print('performing stats based on random pairwise distances')
 
@@ -74,12 +74,12 @@ def main():
             num_pairs=20000,
             nperm=2000,
             len_time=LEN_TIME,
-            num_proc=40,
+            num_proc=20,
             pearson_fdr_test=False)
         t1 = time.time()
 
         print(t1 - t0)
-        np.savez('pval_num_pairs20000_nsub_50_mmse_gt27_nperm2000_' + measure + '.npz',
+        np.savez('pval_num_pairs20000_mmse_all_gt27_nperm2000_' + measure + '_filt.npz',
                  corr_pval_max=corr_pval_max,
                  corr_pval_fdr=corr_pval_fdr,
                  rho=rho,

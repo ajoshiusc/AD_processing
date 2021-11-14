@@ -69,27 +69,24 @@ def main():
                     np.abs(conn_rest), vmin=0, vmax=100, cmap='hot')
     ax1.set_title('Finger Tap', fontsize=14)
     ax1.tick_params(axis='both', which='major', labelsize=14)
-
-    # ax1.set_xticks(range(conn_mat.shape[0]))
-    # ax1.set_yticks(range(conn_mat.shape[1]))
+    ax1.set_xticks(range(conn_mat.shape[0]))
+    ax1.set_yticks(range(conn_mat.shape[1]))
 
     ax2 = axes.flat[1]
     im = ax2.imshow(100*np.abs(conn_reach-conn_rest) /
                     np.abs(conn_rest), vmin=0, vmax=100, cmap='hot')
     ax2.set_title('Reach', fontsize=14)
     ax2.tick_params(axis='both', which='major', labelsize=14)
-
-    # ax2.set_xticks(range(conn_mat.shape[0]))
-    # ax2.set_yticks(range(conn_mat.shape[1]))
+    ax2.set_xticks(range(conn_mat.shape[0]))
+    ax2.set_yticks(range(conn_mat.shape[1]))
 
     ax3 = axes.flat[2]
     im = ax3.imshow(100*np.abs(conn_pen-conn_rest) /
                     np.abs(conn_rest), vmin=0, vmax=100, cmap='hot')
     ax3.set_title('Pen Hold', fontsize=14)
     ax3.tick_params(axis='both', which='major', labelsize=14)
-
-    # ax2.set_xticks(range(conn_mat.shape[0]))
-    # ax2.set_yticks(range(conn_mat.shape[1]))
+    ax3.set_xticks(range(conn_mat.shape[0]))
+    ax3.set_yticks(range(conn_mat.shape[1]))
 
     cbar = plt.colorbar(im, ax=axes.ravel().tolist())
     cbar.ax.tick_params(labelsize=14)

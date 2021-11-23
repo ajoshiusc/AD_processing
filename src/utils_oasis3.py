@@ -70,6 +70,7 @@ def read_oasis3_data(csv_fname,
 def read_oasis3_SCT(csv_fname,
                        data_dir,
                        reg_var_name='Age',
+                       reg_var_positive=0,
                        num_sub=5):
     """ reads fcon1000 csv and data"""
 
@@ -90,12 +91,6 @@ def read_oasis3_SCT(csv_fname,
 
             # If the data does not exist for this subject then skip it
             if not os.path.isfile(fname):
-                continue
-            num_v_t = spio.loadmat(fname)[data_field].shape
-    
-            # Check if there are enough time points
-            if num_v_t[1]<len_time:
-                print(fname + ' doesn\'t have enough timepoints' + str(num_v_t[1]) + '/' + str(len_time))
                 continue
 
             if len(rvar)==0 or (reg_var_positive == 1 and np.float64(rvar) < 0):

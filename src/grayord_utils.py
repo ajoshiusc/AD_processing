@@ -27,12 +27,12 @@ FSL_PATH = '/usr/share/fsl/5.0'
 
 
 def visdata_grayord(data,
-                    surf_name,
-                    out_dir,
-                    smooth_iter,
-                    colorbar_lim,
-                    colormap,
-                    save_png,
+                    surf_name='temp',
+                    out_dir='.',
+                    smooth_iter=300,
+                    colorbar_lim=[0,6],
+                    colormap='hot',
+                    save_png=False,
                     bfp_path='.',
                     fsl_path=FSL_PATH):
     lsurf, rsurf = label_surf(data,

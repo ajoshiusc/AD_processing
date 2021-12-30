@@ -2,15 +2,16 @@ import csv
 import os
 import pandas as pd
 import numpy as np
+from tqdm import tqdm
 
-s = os.listdir('/deneb_disk/bfp_oasis3')
+s = os.listdir('/ImagePTE1/ajoshi/data/bfp_oasis3')
 sub_ids = list()
 sub_clinical_ids = list()
 sub_mr_ids = list()
 gord_fname_list = list()
 
-for n in range(len(s)):
-    gord_fname = os.path.join('/deneb_disk/bfp_oasis3', s[n],'anat',s[n]+'_T1w.SCT.GOrd.mat')
+for n in tqdm(range(len(s))):
+    gord_fname = os.path.join('/ImagePTE1/ajoshi/data/bfp_oasis3', s[n],'anat',s[n]+'_T1w.SCT.GOrd.mat')
 
     if os.path.exists(gord_fname):
         sub_ids.append(s[n][4:12])

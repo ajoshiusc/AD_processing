@@ -96,7 +96,7 @@ def vis_grayord_sigpval(pval,
 
     plsurf, prsurf = label_surf(pval, [0, sig_alpha],
                                 smooth_iter,
-                                'jet_r',
+                                'hot_r',
                                 bfp_path=bfp_path)
     # If p value above .05 then make the surface grey
     plsurf.vColor[plsurf.attributes >= sig_alpha, :] = .5
@@ -176,7 +176,7 @@ def save2volgord_bci(data, out_dir, vol_name, bfp_path='.', fsl_path=FSL_PATH, d
 
 def save2volgord(data, out_dir, vol_name, bfp_path='.', fsl_path=FSL_PATH, default_value=0):
 
-    mni152path = '/usr/share/data/fsl-mni152-templates/MNI152_T1_2mm.nii.gz'
+    mni152path = '/home/ajoshi/webware/fsl/data/standard/MNI152_T1_2mm.nii.gz'
     #join(fsl_path, 'data/standard', 'MNI152_T1_2mm.nii.gz')
     mni2mm = load_img(mni152path)
     a = loadmat(join(bfp_path, 'supp_data', 'MNI2mm_gord_vol_coord.mat'))

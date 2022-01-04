@@ -1,6 +1,6 @@
 clc;clear all;close all;restoredefaultpath;
 %addpath(genpath('/big_disk/ajoshi/coding_ground/bfp/supp_data'))
-addpath(genpath('/home/ajoshi/projects/bfp/src'));
+addpath(genpath('/ImagePTE1/ajoshi/code_farm/bfp/src'));
 %    1050345 rest 2
 
 studydir='/ImagePTE1/ajoshi/data/bfp_oasis3';
@@ -53,7 +53,7 @@ end
 
 %Process all subjects using BFP
 %parpool(6);
-GOrdSurfIndFile='/home/ajoshi/projects/bfp/supp_data/bci_grayordinates_surf_ind.mat';
+GOrdSurfIndFile='/ImagePTE1/ajoshi/code_farm/bfp/supp_data/bci_grayordinates_surf_ind.mat';
 out_dir='/ImagePTE1/ajoshi/data/thickness_data/thickness_ld';
 for s = 1:length(subnamelist)
 %    try
@@ -63,10 +63,16 @@ for s = 1:length(subnamelist)
         subbasename=fullfile(anatDir,sprintf('%s_T1w',subid));
 
         GOrdFile=fullfile(out_dir,[subid,'.ld.gord.mat']);
-        linked_dist_gord(subbasename,GOrdSurfIndFile,GOrdFile);
+        if ~exist(GOrdFile,'file') && exist([subbasename,'.left.inner.cortex.svreg.dfs'],'file')
+            linked_dist_gord(subbasename,GOrdSurfIndFile,GOrdFile);
+        end
+        if ~exist([subbasename,'.left.inner.cortex.svreg.dfs'],'file')
+            fprintf('File doesn''t exist:%s',[subbasename,'.left.inner.cortex.svreg.dfs']);
+        end
+
         %        bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], 'rest',TR);
  %   catch 
-        fprintf('subject done:%d  %s',s,subnamelist{s});
+        fprintf('subject done:%d  %s\n',s,subnamelist{s});
   %  end
 end
 

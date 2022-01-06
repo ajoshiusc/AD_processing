@@ -22,7 +22,6 @@ for n in tqdm(range(len(s))):
 print(sub_ids)
 
 
-
 csvname1 = '../ADRC_Clinical_Data_aajoshi_5_14_2021_1_47_36.csv'
 csvname2 = '../oasis3_MR_scans.csv'
 measure = 'mmse'

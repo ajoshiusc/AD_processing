@@ -106,7 +106,8 @@ def read_oasis3_SCT(csv_fname,
             reg_var.append(float(rvar))
 
             count1 += 1
-            pbar.update(1)  # update the progress bar
+            pbar.update(1)  
+            # update the progress bar
             #print('%d,' % count1, end='')
             if count1 == num_sub:
                 break

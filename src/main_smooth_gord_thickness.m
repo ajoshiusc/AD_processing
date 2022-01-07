@@ -15,9 +15,8 @@ NV=length(lsurf.vertices);
 for i=3:length(d)
 
     fname = fullfile(inp_dir,d(i).name);
-    a=load(fname);
+    load(fname);
 
-    data = a.data;
     left_data = data(1:NV);
     right_data = data(NV+1:2*NV);
 

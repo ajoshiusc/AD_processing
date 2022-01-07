@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-th_method = "ld"
+th_method = "pvc_th"
 s = os.listdir("/ImagePTE1/ajoshi/data/bfp_oasis3")
 sub_ids = list()
 sub_clinical_ids = list()
@@ -13,7 +13,7 @@ gord_fname_list = list()
 
 for n in tqdm(range(len(s))):
     gord_fname = os.path.join(
-        "/ImagePTE1/ajoshi/data/thickness_data/thickness_ld",
+        "/ImagePTE1/ajoshi/data/thickness_data/thickness_" + th_method,
         s[n] + "." + th_method + ".gord.mat",
     )
 

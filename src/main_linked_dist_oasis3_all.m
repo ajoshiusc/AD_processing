@@ -29,7 +29,7 @@ for j=3:length(l)
     fmri=fullfile('/ImagePTE1/ajoshi/data/oasis3_bids/',subname,sessions{1},'func',[subname,'_',sessions{1},'_task-rest_run-02_bold.nii.gz']);
     
     if ~exist(t1,'file')
-        t1=fullfile('/ImagePTE1/ajoshi/oasis3_bids/',subname,sessions{1},'anat',[subname,'_',sessions{1},'_T1w.nii.gz']);
+        t1=fullfile('/ImagePTE1/ajoshi/data/oasis3_bids/',subname,sessions{1},'anat',[subname,'_',sessions{1},'_T1w.nii.gz']);
     end
     
     if ~exist(fmri,'file')
@@ -52,10 +52,10 @@ for j=3:length(l)
 end
 
 %Process all subjects using BFP
-%parpool(6);
+parpool(6);
 GOrdSurfIndFile='/ImagePTE1/ajoshi/code_farm/bfp/supp_data/bci_grayordinates_surf_ind.mat';
 out_dir='/ImagePTE1/ajoshi/data/thickness_data/thickness_ld';
-for s = 1:length(subnamelist)
+parfor s = 1:length(subnamelist)
 %    try
         subid=[subnamelist{s},'_',sessionslist{s},'_',runlist{s}];
         subdir=fullfile(studydir,subid);

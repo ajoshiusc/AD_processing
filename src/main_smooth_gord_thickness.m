@@ -11,8 +11,8 @@ lsurf = readdfs(left_surf);
 right_surf = '/ImagePTE1/ajoshi/code_farm/bfp/supp_data/bci32kright_smooth.dfs';
 rsurf = readdfs(right_surf);
 NV=length(lsurf.vertices);
-
-for i=3:length(d)
+parpool(6);
+parfor i=3:length(d)
 
     fname = fullfile(inp_dir,d(i).name);
     load(fname);

@@ -11,12 +11,13 @@ lsurf = readdfs(left_surf);
 right_surf = '/ImagePTE1/ajoshi/code_farm/bfp/supp_data/bci32kright_smooth.dfs';
 rsurf = readdfs(right_surf);
 NV=length(lsurf.vertices);
-parpool(6);
-parfor i=3:length(d)
+%parpool(6);
+for i=3:length(d)
 
     fname = fullfile(inp_dir,d(i).name);
-    load(fname);
+    a=load(fname);
 
+    data = a.data;
     left_data = data(1:NV);
     right_data = data(NV+1:2*NV);
 

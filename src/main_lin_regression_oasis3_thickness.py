@@ -30,7 +30,7 @@ NUM_VERT = 96854
 
 
 def main():
-    smth = 1
+    smth = 0
     NUM_SUB = 3500  # Number of subjects for the study
 
     s = glob.glob(

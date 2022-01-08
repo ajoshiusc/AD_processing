@@ -1,12 +1,9 @@
 clc;clear all;close all;restoredefaultpath;
 %addpath(genpath('/big_disk/ajoshi/coding_ground/bfp/supp_data'))
-addpath(genpath('/home/ajoshi/projects/bfp/src'));
+addpath(genpath('/ImagePTE1/ajoshi/code_farm/bfp/src'));
 %    1050345 rest 2
 
-studydir='/deneb_disk/bfp_oasis3';
-TR='';
-% Set the input arguments
-configfile='/home/ajoshi/projects/AD_processing/src/config_bfp_preproc.ini';
+studydir='/ImagePTE1/ajoshi/data/bfp_oasis3';
 
 subdir='/ImagePTE1/ajoshi/data/oasis3_bids';
 l=dir(subdir);
@@ -56,11 +53,26 @@ end
 
 %Process all subjects using BFP
 parpool(6);
+GOrdSurfIndFile='/ImagePTE1/ajoshi/code_farm/bfp/supp_data/bci_grayordinates_surf_ind.mat';
+out_dir='/ImagePTE1/ajoshi/data/thickness_data/thickness_pvc_th';
 parfor s = 1:length(subnamelist)
-    try
-        bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], 'rest',TR);
-    catch 
-        fprintf('subject failed:%d  %s',s,subnamelist{s});
-    end
+%    try
+        subid=[subnamelist{s},'_',sessionslist{s},'_',runlist{s}];
+        subdir=fullfile(studydir,subid);
+        anatDir=fullfile(subdir,'anat');
+        subbasename=fullfile(anatDir,sprintf('%s_T1w',subid));
+
+        GOrdFile=fullfile(out_dir,[subid,'.pvc_th.gord.mat']);
+        if ~exist(GOrdFile,'file') && exist([subbasename,'.pvc-thickness_0-6mm.left.mid.cortex.dfs'],'file')
+            pvc_th_gord(subbasename,GOrdSurfIndFile,GOrdFile);
+        end
+        if ~exist([subbasename,'.left.inner.cortex.svreg.dfs'],'file')
+            fprintf('File doesn''t exist:%s',[subbasename,'.pvc-thickness_0-6mm.left.mid.cortex.svreg.dfs']);
+        end
+
+        %        bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], 'rest',TR);
+ %   catch 
+        fprintf('subject done:%d  %s\n',s,subnamelist{s});
+  %  end
 end
 

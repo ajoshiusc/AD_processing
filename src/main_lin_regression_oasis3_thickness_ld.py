@@ -41,7 +41,7 @@ def main():
     NUM_SUB = 3500  # Number of subjects for the study
 
     s = glob.glob(
-        "/home/ajoshi/projects/AD_processing/csv_files/oasis3_bfp_mmse_ld.csv"
+        "/home/ajoshi/projects/AD_processing/csv_files/oasis3_bfp_mmse_ld_smooth.csv"
     )
 
     measure = "mmse"
@@ -55,11 +55,11 @@ def main():
         num_sub=NUM_SUB,
     )
 
-    # ind = np.where(reg_var > 27)[0]
-    # ind_mapping = map(sub_files.__getitem__, ind)
-    # sub_files = list(ind_mapping)
-    # reg_var = reg_var[ind]
-
+    """     ind = np.where(reg_var > 27)[0]
+        ind_mapping = map(sub_files.__getitem__, ind)
+        sub_files = list(ind_mapping)
+        reg_var = reg_var[ind]
+    """
     NUM_SUB = len(sub_files)
     thickness_all = np.zeros((NUM_VERT, NUM_SUB))
 

@@ -11,10 +11,18 @@ lsurf = readdfs(left_surf);
 right_surf = '/ImagePTE1/ajoshi/code_farm/bfp/supp_data/bci32kright_smooth.dfs';
 rsurf = readdfs(right_surf);
 NV=length(lsurf.vertices);
-%parpool(6);
-for i=3:length(d)
+parpool(6);
+parfor i=3:length(d)
 
     fname = fullfile(inp_dir,d(i).name);
+    outfname = fullfile(out_dir,[d(i).name(1:end-3),'smooth.mat']);
+    
+    process_data(fname,outfname,NV,lsurf,rsurf)
+
+end
+
+
+function process_data(fname,outfname,NV,lsurf,rsurf)
     load(fname);
 
     left_data = data(1:NV);
@@ -23,9 +31,5 @@ for i=3:length(d)
     data(1:NV)=smooth_surf_function(lsurf,left_data);
     data(NV+1:2*NV)=smooth_surf_function(rsurf,right_data);
 
-    name = fullfile(out_dir,[d(i).name(1:end-3),'smooth.mat']);
-    save(fname,'data');
-
+    save(outfname,'data');
 end
-
-

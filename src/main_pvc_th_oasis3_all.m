@@ -66,9 +66,6 @@ parfor s = 1:length(subnamelist)
         if ~exist(GOrdFile,'file') && exist([subbasename,'.pvc-thickness_0-6mm.left.mid.cortex.dfs'],'file')
             pvc_th_gord(subbasename,GOrdSurfIndFile,GOrdFile);
         end
-        if ~exist([subbasename,'.left.inner.cortex.svreg.dfs'],'file')
-            fprintf('File doesn''t exist:%s',[subbasename,'.pvc-thickness_0-6mm.left.mid.cortex.svreg.dfs']);
-        end
 
         %        bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], 'rest',TR);
  %   catch 

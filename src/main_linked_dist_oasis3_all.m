@@ -63,11 +63,8 @@ parfor s = 1:length(subnamelist)
         subbasename=fullfile(anatDir,sprintf('%s_T1w',subid));
 
         GOrdFile=fullfile(out_dir,[subid,'.ld.gord.mat']);
-        if ~exist(GOrdFile,'file') && exist([subbasename,'.left.inner.cortex.svreg.dfs'],'file')
+        if ~exist(GOrdFile,'file') && exist([subbasename,'.pvc-thickness_0-6mm.left.mid.cortex.dfs'],'file')
             linked_dist_gord(subbasename,GOrdSurfIndFile,GOrdFile);
-        end
-        if ~exist([subbasename,'.left.inner.cortex.svreg.dfs'],'file')
-            fprintf('File doesn''t exist:%s',[subbasename,'.left.inner.cortex.svreg.dfs']);
         end
 
         %        bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], 'rest',TR);

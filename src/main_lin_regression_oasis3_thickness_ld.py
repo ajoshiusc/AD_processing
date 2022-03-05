@@ -53,6 +53,7 @@ def main():
         reg_var_name=measure,
         reg_var_positive=True,
         num_sub=NUM_SUB,
+        good_subs_list='good_subids.txt'
     )
 
     '''ind = np.where(reg_var > 25)[0]

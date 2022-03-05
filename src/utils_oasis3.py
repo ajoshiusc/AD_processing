@@ -125,13 +125,20 @@ def read_oasis3_thickness(csv_fname,
                        data_dir,
                        reg_var_name='Age',
                        reg_var_positive=0,
-                       num_sub=5):
+                       num_sub=5,
+                       good_subs_list=''):
     """ reads fcon1000 csv and data"""
 
     count1 = 0
     sub_ids = []
     reg_var = []
     pbar = tqdm(total=num_sub)
+
+    with open(good_subs_list,'r') as f:
+
+        good_subids = f.read().splitlines()
+
+
 
     with open(csv_fname, newline='') as csvfile:
         creader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
@@ -155,9 +162,12 @@ def read_oasis3_thickness(csv_fname,
 
             # Truncate the data at a given number of time samples This is needed because
             # BrainSync needs same number of time sampples
-            sub_data_files.append(fname)
-            sub_ids.append(row['Subject'])
-            reg_var.append(float(rvar))
+            new_sub_id = row['Subject']
+
+            if new_sub_id in good_subids:
+                sub_data_files.append(fname)
+                sub_ids.append(row['Subject'])
+                reg_var.append(float(rvar))
 
             count1 += 1
             pbar.update(1)  
@@ -169,5 +179,7 @@ def read_oasis3_thickness(csv_fname,
     pbar.close()
     print('CSV file and the data has been read\nThere are %d subjects' %
           (len(sub_ids)))
+
+
 
     return sub_ids, sp.array(reg_var), sub_data_files

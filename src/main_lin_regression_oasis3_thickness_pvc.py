@@ -53,6 +53,7 @@ def main():
         reg_var_name=measure,
         reg_var_positive=True,
         num_sub=NUM_SUB,
+        good_subs_list='good_subids.txt'
     )
 
     '''ind = np.where(reg_var > 25)[0]
@@ -90,7 +91,7 @@ def main():
         sig_alpha=0.05,
         surf_name="thickness_pvc_smooth" + str(smth),
         out_dir=".",
-        smooth_iter=50,
+        smooth_iter=0,
         bfp_path=BFPPATH,
         fsl_path=FSL_PATH,
     )
@@ -99,7 +100,7 @@ def main():
         sig_alpha=0.05,
         surf_name="thickness_pvc_smooth" + str(smth) + "fdr",
         out_dir=".",
-        smooth_iter=50,
+        smooth_iter=0,
         bfp_path=BFPPATH,
         fsl_path=FSL_PATH,
     )

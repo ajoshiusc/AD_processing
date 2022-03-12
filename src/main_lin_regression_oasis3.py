@@ -35,11 +35,12 @@ NUM_SUB = 3500  # Number of subjects for the study
 
 def main():
 
-    s = glob.glob('/home/ajoshi/projects/AD_processing/csv_files/*mmse*.csv')
+    s = glob.glob(
+        '/home/ajoshi/projects/AD_processing/csv_files/oasis3_bfp_nofilt_mmse.csv')
 
     for i in range(len(s)):
 
-        measure = s[i][57:-4]
+        measure = 'mmse'
         CSV_FILE = s[i]
 
         print('Reading subjects')
@@ -47,45 +48,40 @@ def main():
                                                  data_dir=DATA_DIR,
                                                  reg_var_name=measure,
                                                  num_sub=NUM_SUB,
-                                                 len_time=LEN_TIME)
+                                                 len_time=LEN_TIME,
+                                                 good_subs_list='good_subids.txt')
 
         # Shuffle reg_var and subjects for testing
         #reg_var = sp.random.permutation(reg_var)
-        
+
         #ran_perm = sp.random.permutation(len(reg_var))
         #reg_var = reg_var
         #sub_files = [sub_files[i] for i in ran_perm]
 
-        ind = np.where(reg_var>27)[0]
+        '''ind = np.where(reg_var>27)[0]
 
         ind_mapping = map(sub_files.__getitem__, ind)
 
         sub_files = list(ind_mapping)
-        reg_var = reg_var[ind]
+        reg_var = reg_var[ind]'''
         reg_var = reg_var   # 50 subjects
         sub_files = sub_files  # 50 subjects
         t0 = time.time()
         print('performing stats based on random pairwise distances')
 
-        corr_pval_max, corr_pval_fdr, rho, power, effect, estN = randpairs_regression(
-            bfp_path=BFPPATH,
-            sub_files=sub_files,
-            reg_var=reg_var,
-            num_pairs=20000,
-            nperm=2000,
-            len_time=LEN_TIME,
-            num_proc=20,
-            pearson_fdr_test=False)
+        corr_pval_max, corr_pval_fdr, rho, power, effect, estN = randpairs_regression(bfp_path=BFPPATH,
+                                                                                      sub_files=sub_files,
+                                                                                      reg_var=reg_var,
+                                                                                      num_pairs=20000,
+                                                                                      nperm=2000,
+                                                                                      len_time=LEN_TIME,
+                                                                                      num_proc=12,
+                                                                                      pearson_fdr_test=False)
         t1 = time.time()
 
         print(t1 - t0)
-        np.savez('pval_num_pairs20000_mmse_all_gt27_nperm2000_' + measure + '_filt.npz',
-                 corr_pval_max=corr_pval_max,
-                 corr_pval_fdr=corr_pval_fdr,
-                 rho=rho,
-                 power=power,
-                 effect=effect,
-                 estN=estN)
+        np.savez('pval_num_pairs20000_mmse_all_nperm2000_' + measure + '_nofilt.npz', corr_pval_max=corr_pval_max,
+                 corr_pval_fdr=corr_pval_fdr, rho=rho, power=power, effect=effect, estN=estN)
 
     vis_grayord_sigpval(corr_pval_max,
                         surf_name='rand_dist_corr_perm_pairs20000_max',

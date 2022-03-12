@@ -40,7 +40,7 @@ def main():
 
     #a = np.load('src/pval_num_pairs20000_nsub350_nperm2000_mmse_perm.npz')
     #a = np.load('src/pval_num_pairs20000_nsub_50_mmse_gt27_nperm2000_' + measure + '.npz')
-    a = np.load('pval_num_pairs20000_mmse_all_gt27_nperm2000_' + measure + '_filt.npz')
+    a = np.load('pval_num_pairs20000_mmse_all_gt27_nperm2000_' + measure + '_no_filt.npz')
 
     power = a['power']
     rho = a['rho']

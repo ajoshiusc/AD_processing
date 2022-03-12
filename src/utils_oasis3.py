@@ -12,13 +12,18 @@ def read_oasis3_data(csv_fname,
                        num_sub=5,
                        reg_var_positive=1,
                        len_time=20,
-                       data_field='dtseries'):
+                       data_field='dtseries',
+                       good_subs_list=''):
     """ reads fcon1000 csv and data"""
 
     count1 = 0
     sub_ids = []
     reg_var = []
     pbar = tqdm(total=num_sub)
+
+    with open(good_subs_list,'r') as f:
+        good_subids = f.read().splitlines()
+
 
     with open(csv_fname, newline='') as csvfile:
         creader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
@@ -46,11 +51,14 @@ def read_oasis3_data(csv_fname,
             if count1 == 0:
                 sub_data_files = []
 
-            # Truncate the data at a given number of time samples This is needed because
-            # BrainSync needs same number of time sampples
-            sub_data_files.append(fname)
-            sub_ids.append(row['Subject'])
-            reg_var.append(float(rvar))
+            new_sub_id = row['Subject']
+
+            if new_sub_id in good_subids:
+                # Truncate the data at a given number of time samples This is needed because
+                # BrainSync needs same number of time sampples
+                sub_data_files.append(fname)
+                sub_ids.append(new_sub_id)
+                reg_var.append(float(rvar))
 
             count1 += 1
             pbar.update(1)  # update the progress bar

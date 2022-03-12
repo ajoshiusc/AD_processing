@@ -4,8 +4,8 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-th_method = "ld"
-gord_dir = th_method + '_smooth'
+th_method = "pvc_th"
+gord_dir = th_method 
 
 s = os.listdir("/ImagePTE1/ajoshi/data/bfp_oasis3")
 sub_ids = list()
@@ -16,7 +16,7 @@ gord_fname_list = list()
 for n in tqdm(range(len(s))):
     gord_fname = os.path.join(
         "/ImagePTE1/ajoshi/data/thickness_data/thickness_" + gord_dir,
-        s[n] + "." + th_method + ".gord.smooth.mat",
+        s[n] + "." + th_method + ".gord.mat",
     )
 
     if os.path.exists(gord_fname):
@@ -64,7 +64,7 @@ print(result)
 
 result.rename(columns={"M/F": "Gender", measure: measure_short}, inplace=True)
 
-result.to_csv("oasis3_bfp_" + measure_short + "_" + th_method + "_smooth.csv")
+result.to_csv("oasis3_bfp_" + measure_short + "_" + th_method + ".csv")
 
 # result.to_csv('oasis3_bfp_SCT.csv')
 

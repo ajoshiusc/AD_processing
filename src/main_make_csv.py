@@ -11,7 +11,7 @@ gord_fname_list = list()
 
 for n in range(len(s)):
     gord_fname = os.path.join('/deneb_disk/bfp_oasis3', s[n], 'func',
-                              s[n] + '_rest_bold.32k.GOrd.filt.mat')
+                              s[n] + '_rest_bold.32k.GOrd.mat')
 
     if os.path.exists(gord_fname):
         sub_ids.append(s[n][4:12])
@@ -57,7 +57,7 @@ print(result)
 
 result.rename(columns={'M/F': 'Gender', measure: measure_short}, inplace=True)
 
-result.to_csv('oasis3_bfp_' + measure_short + '.csv')
+result.to_csv('oasis3_bfp_nofilt_' + measure_short + '.csv')
 
 print('done')
 

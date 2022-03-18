@@ -37,11 +37,11 @@ NUM_VERT = 96854
 
 
 def main():
-    smth = 1
+    smth = 0
     NUM_SUB = 3500  # Number of subjects for the study
 
     s = glob.glob(
-        "/home/ajoshi/projects/AD_processing/csv_files/oasis3_bfp_mmse_ld_smooth.csv"
+        "/home/ajoshi/projects/AD_processing/csv_files/oasis3_bfp_mmse_ld.csv"
     )
 
     measure = "mmse"

@@ -40,7 +40,7 @@ def main():
 
     #a = np.load('src/pval_num_pairs20000_nsub350_nperm2000_mmse_perm.npz')
     #a = np.load('src/pval_num_pairs20000_nsub_50_mmse_gt27_nperm2000_' + measure + '.npz')
-    a = np.load('pval_num_pairs20000_mmse_all_gt27_nperm2000_' + measure + '_no_filt.npz')
+    a = np.load('pval_num_pairs20000_mmse_all_nperm2000_mmse_filt.npz')
 
     power = a['power']
     rho = a['rho']
@@ -59,7 +59,7 @@ def main():
                         smooth_iter=1000,
                         bfp_path=BFPPATH,
                         fsl_path=FSL_PATH,
-                        sig_alpha=0.05)
+                        sig_alpha=0.15)
     vis_grayord_sigpval(corr_pval_fdr,
                         surf_name='corr_perm_pairs20000_fdr' +
                         measure,
@@ -67,7 +67,7 @@ def main():
                         smooth_iter=1000,
                         bfp_path=BFPPATH,
                         fsl_path=FSL_PATH,
-                        sig_alpha=0.05)
+                        sig_alpha=0.15)
 
     visdata_grayord(rho,
                     surf_name='corr_perm_pairs20000_rho' + measure,

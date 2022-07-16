@@ -54,27 +54,29 @@ for j=3:length(l)
     end
 end
 
+
+config.FSLPATH = '/home/ajoshi/webware/fsl'
+config.FSLOUTPUTTYPE='NIFTI_GZ';
+config.AFNIPATH = '/home/ajoshi/abin';
+config.FSLRigidReg=0;
+config.MultiThreading=0;
+config.BFPPATH='/home/ajoshi/projects/bfp';
+
 %Process all subjects using BFP
-%parpool(6);
-for s = 1:length(subnamelist)
-    try
+parpool(6);
+parfor s = 1:length(subnamelist)
+    %try
         bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], 'rest',TR);
 
         subid = [subnamelist{s},'_',sessionslist{s},'_',runlist{s}];
         fmribase = fullfile(studydir,subid,'func',[subid,'_rest_bold']);
-        anatbase = fullfile(studydir,subid,'func',[subid,'_T1w']);
-        config.FSLPATH = '/home/ajoshi/webware/fsl'
-        config.FSLOUTPUTTYPE='NIFTI_GZ';
-        config.AFNIPATH = '/home/ajoshi/abin';
-        config.FSLRigidReg=0;
-        config.MultiThreading=0;
-        config.BFPPATH='/home/ajoshi/projects/bfp';
+        anatbase = fullfile(studydir,subid,'anat',[subid,'_T1w']);
 
         %function gen_alff_gord()
         get_alff_gord(config, fmribase, anatbase)
 
-    catch
-        fprintf('subject failed:%d  %s',s,subnamelist{s});
-    end
+    %catch
+    %    fprintf('subject failed:%d  %s',s,subnamelist{s});
+    %end
 end
 

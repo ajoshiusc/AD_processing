@@ -15,10 +15,10 @@ BFPPATH = '/home/ajoshi/projects/bfp'
 FSL_PATH = '/home/ajoshi/webware/fsl'
 
 visdata_grayord(data, # - 1000*(1.-rejected),
-                surf_name='alffz',
+                surf_name='ALFF_Z',
                 out_dir='.',
                 smooth_iter=1000,
-                colorbar_lim=[-2, 2],
+                colorbar_lim=[-1, 1],
                 colormap='jet',
                 save_png=True,
                 bfp_path=BFPPATH,

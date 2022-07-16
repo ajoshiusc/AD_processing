@@ -457,7 +457,6 @@ from matplotlib.colors import LightSource
 #from vispy.scene.cameras import TurntableCamera
 #import vispy.io
 #import vispy.geometry
-import ply
 import sys
 
 #def view_patch_vispy(r, attrib=[], opacity=1, fig=0, show=1, colorbar=1, clim=[0], outfile=0, azimuth=0, elevation=-90, colormap='jet'):

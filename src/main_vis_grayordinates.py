@@ -7,7 +7,7 @@ import numpy as np
 from brainsync import normalizeData, brainSync
 from grayord_utils import visdata_grayord, vis_grayord_sigpval
 
-fdata = '/home/ajoshi/sub08001/func/sub08001_T1w_rest_bold.ALFF_Z.GOrd.mat'
+fdata = '/home/ajoshi/sub08001/func/sub08001_rest_bold.ALFF_Z.GOrd.mat'
 
 data = spio.loadmat(fdata)['data'].squeeze()
 

@@ -191,3 +191,70 @@ def read_oasis3_thickness(csv_fname,
 
 
     return sub_ids, sp.array(reg_var), sub_data_files
+
+
+
+
+
+def read_oasis3_ALFF(csv_fname,
+                       data_dir,
+                       reg_var_name='Age',
+                       reg_var_positive=0,
+                       num_sub=5,
+                       good_subs_list=''):
+    """ reads fcon1000 csv and data"""
+
+    count1 = 0
+    sub_ids = []
+    reg_var = []
+    pbar = tqdm(total=num_sub)
+
+    with open(good_subs_list,'r') as f:
+
+        good_subids = f.read().splitlines()
+
+
+
+    with open(csv_fname, newline='') as csvfile:
+        creader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+        for row in creader:
+
+            # read the regression variable
+            rvar = row[reg_var_name]
+
+            # Read the filtered data by default
+            fname = row['FileName']
+
+            # If the data does not exist for this subject then skip it
+            if not os.path.isfile(fname):
+                continue
+
+            if len(rvar)==0 or (reg_var_positive == 1 and np.float64(rvar) < 0):
+                continue
+
+            if count1 == 0:
+                sub_data_files = []
+
+            # Truncate the data at a given number of time samples This is needed because
+            # BrainSync needs same number of time sampples
+            new_sub_id = row['Subject']
+
+            if new_sub_id in good_subids:
+                sub_data_files.append(fname)
+                sub_ids.append(row['Subject'])
+                reg_var.append(float(rvar))
+
+            count1 += 1
+            pbar.update(1)  
+            # update the progress bar
+            #print('%d,' % count1, end='')
+            if count1 == num_sub:
+                break
+
+    pbar.close()
+    print('CSV file and the data has been read\nThere are %d subjects' %
+          (len(sub_ids)))
+
+
+
+    return sub_ids, sp.array(reg_var), sub_data_files

@@ -65,8 +65,8 @@ config.BFPPATH='/home/ajoshi/projects/bfp';
 %Process all subjects using BFP
 parpool(6);
 parfor s = 1:length(subnamelist)
-    %try
-        bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], 'rest',TR);
+    try
+        %bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], 'rest',TR);
 
         subid = [subnamelist{s},'_',sessionslist{s},'_',runlist{s}];
         fmribase = fullfile(studydir,subid,'func',[subid,'_rest_bold']);
@@ -75,8 +75,8 @@ parfor s = 1:length(subnamelist)
         %function gen_alff_gord()
         get_alff_gord(config, fmribase, anatbase)
 
-    %catch
-    %    fprintf('subject failed:%d  %s',s,subnamelist{s});
-    %end
+    catch
+        fprintf('subject failed:%d  %s',s,subnamelist{s});
+    end
 end
 

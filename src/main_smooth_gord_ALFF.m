@@ -1,8 +1,8 @@
 clc;clear all;close all;
 addpath(genpath('/ImagePTE1/ajoshi/code_farm/bfp/src'));
 
-inp_dir='/deneb_disk/oasis_alff_data';
-out_dir='/deneb_disk/oasis_alff_data_smooth';
+inp_dir='/deneb_disk/oasis_falff_data';
+out_dir='/deneb_disk/oasis_falff_data_smooth';
 
 d = dir(inp_dir);
 

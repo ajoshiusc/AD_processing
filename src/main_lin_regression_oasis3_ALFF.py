@@ -39,7 +39,7 @@ NUM_VERT = 96854
 def main():
     NUM_SUB = 3500  # Number of subjects for the study
 
-    s = glob.glob("/home/ajoshi/projects/AD_processing/src/oasis3_bfp_alff_z_smooth.csv")
+    s = glob.glob("/home/ajoshi/projects/AD_processing/src/outputs/oasis3_bfp_falff_smooth.csv")
 
     measure = "mmse"
     CSV_FILE = s[0]
@@ -86,8 +86,8 @@ def main():
     vis_grayord_sigpval(
         pval=corr_pval,
         sig_alpha=0.05,
-        surf_name="outputs/ALFF_Z_smooth",
-        out_dir=".",
+        surf_name="fALFF_smooth",
+        out_dir="outputs",
         smooth_iter=0,
         bfp_path=BFPPATH,
         fsl_path=FSL_PATH,
@@ -95,8 +95,8 @@ def main():
     vis_grayord_sigpval(
         pval=corr_pval_fdr,
         sig_alpha=0.05,
-        surf_name="outputs/ALFF_Z_smooth_fdr",
-        out_dir=".",
+        surf_name="fALFF_smooth_fdr",
+        out_dir="outputs",
         smooth_iter=0,
         bfp_path=BFPPATH,
         fsl_path=FSL_PATH,

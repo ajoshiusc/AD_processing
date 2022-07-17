@@ -4,14 +4,14 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-s = os.listdir("/deneb_disk/oasis_alff_data_z_smooth")
+s = os.listdir("/deneb_disk/oasis_falff_data_smooth")
 sub_ids = list()
 sub_clinical_ids = list()
 sub_mr_ids = list()
 gord_fname_list = list()
 
 for n in tqdm(range(len(s))):
-    gord_fname = os.path.join('/deneb_disk/oasis_alff_data_z_smooth',s[n]) #os.path.join('/deneb_disk/bfp_oasis3',s[n],'func',s[n] +'_rest_bold.ALFF_Z.GOrd.mat')
+    gord_fname = os.path.join('/deneb_disk/oasis_falff_data_smooth',s[n]) #os.path.join('/deneb_disk/bfp_oasis3',s[n],'func',s[n] +'_rest_bold.ALFF_Z.GOrd.mat')
 
     if os.path.exists(gord_fname):
         sub_ids.append(s[n][4:12])
@@ -58,7 +58,7 @@ print(result)
 
 result.rename(columns={"M/F": "Gender", measure: measure_short}, inplace=True)
 
-result.to_csv("oasis3_bfp_alff_z_smooth.csv")
+result.to_csv("outputs/oasis3_bfp_falff_smooth.csv")
 
 # result.to_csv('oasis3_bfp_SCT.csv')
 

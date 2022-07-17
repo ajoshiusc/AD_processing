@@ -41,7 +41,7 @@ def main():
     NUM_SUB = 3500  # Number of subjects for the study
 
     s = glob.glob(
-        "/home/ajoshi/projects/AD_processing/csv_files/oasis3_bfp_mmse_pvc_th.csv"
+        "/home/ajoshi/projects/AD_processing/src/outputs/oasis3_bfp_mmse_pvc_th_smooth.csv"
     )
 
     measure = "mmse"
@@ -56,10 +56,10 @@ def main():
         good_subs_list='good_subids.txt'
     )
 
-    #ind = np.where(reg_var > 25)[0]
-    #ind_mapping = map(sub_files.__getitem__, ind)
-    #sub_files = list(ind_mapping)
-    #reg_var = reg_var[ind]
+    ind = np.where(reg_var > 25)[0]
+    ind_mapping = map(sub_files.__getitem__, ind)
+    sub_files = list(ind_mapping)
+    reg_var = reg_var[ind]
     #reg_var = np.random.permutation(reg_var)
 
     NUM_SUB = len(sub_files)
@@ -90,7 +90,7 @@ def main():
         pval=corr_pval,
         sig_alpha=0.05,
         surf_name="thickness_pvc_smooth" + str(smth),
-        out_dir=".",
+        out_dir="outputs",
         smooth_iter=0,
         bfp_path=BFPPATH,
         fsl_path=FSL_PATH,
@@ -99,7 +99,7 @@ def main():
         pval=corr_pval_fdr,
         sig_alpha=0.05,
         surf_name="thickness_pvc_smooth" + str(smth) + "fdr",
-        out_dir=".",
+        out_dir="outputs",
         smooth_iter=0,
         bfp_path=BFPPATH,
         fsl_path=FSL_PATH,

@@ -1,8 +1,8 @@
 clc;clear all;close all;
 addpath(genpath('/ImagePTE1/ajoshi/code_farm/bfp/src'));
 
-inp_dir='/ImagePTE1/ajoshi/data/thickness_data/thickness_ld';
-out_dir='/ImagePTE1/ajoshi/data/thickness_data/thickness_ld_smooth';
+inp_dir='/ImagePTE1/ajoshi/data/thickness_data/thickness_pvc_iso_th';
+out_dir='/ImagePTE1/ajoshi/data/thickness_data/thickness_pvc_iso_th_smooth';
 
 d = dir(inp_dir);
 

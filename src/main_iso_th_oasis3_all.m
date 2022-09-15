@@ -54,7 +54,7 @@ end
 %Process all subjects using BFP
 parpool(12);
 GOrdSurfIndFile='/ImagePTE1/ajoshi/code_farm/bfp/supp_data/bci_grayordinates_surf_ind.mat';
-out_dir='/ImagePTE1/ajoshi/data/thickness_data/thickness_pvc_iso_th';
+out_dir='/ImagePTE1/ajoshi/data/thickness_data/thickness_iso_th';
 parfor s = 1:length(subnamelist)
     try
         subid=[subnamelist{s},'_',sessionslist{s},'_',runlist{s}];
@@ -62,9 +62,9 @@ parfor s = 1:length(subnamelist)
         anatDir=fullfile(subdir,'anat');
         subbasename=fullfile(anatDir,sprintf('%s_T1w',subid));
 
-        GOrdFile=fullfile(out_dir,[subid,'.pvc_iso_th.gord.mat']);
-        if ~exist(GOrdFile,'file') && exist([subbasename,'.pvc_iso-thickness_0-6mm.left.mid.cortex.dfs'],'file')
-            pvc_iso_th_gord(subbasename,GOrdSurfIndFile,GOrdFile);
+        GOrdFile=fullfile(out_dir,[subid,'.iso_th.gord.mat']);
+        if ~exist(GOrdFile,'file') && exist([subbasename,'.iso-thickness_0-6mm.left.mid.cortex.dfs'],'file')
+            iso_th_gord(subbasename,GOrdSurfIndFile,GOrdFile);
         end
 
         %        bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], 'rest',TR);

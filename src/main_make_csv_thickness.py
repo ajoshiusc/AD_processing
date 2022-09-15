@@ -4,8 +4,8 @@ import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
-th_method = 'pvc_iso_th'
-gord_dir = "pvc_iso_th_smooth" 
+th_method = 'fs_th'
+gord_dir = "fs_th_smooth" 
 
 s = os.listdir("/ImagePTE1/ajoshi/data/bfp_oasis3")
 sub_ids = list()

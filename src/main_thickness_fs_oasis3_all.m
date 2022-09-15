@@ -2,7 +2,7 @@ clc;clear all;close all;restoredefaultpath;
 %addpath(genpath('/big_disk/ajoshi/coding_ground/bfp/supp_data'))
 addpath(genpath('/home/ajoshi/projects/svreg/src'));
 addpath(genpath('/home/ajoshi/projects/svreg/3rdParty'));
-
+addpath(genpath('/home/ajoshi/projects/pvcthickness'));
 %    1050345 rest 2
 
 studydir='/ImagePTE1/ajoshi/data/bfp_oasis3';
@@ -61,10 +61,10 @@ parfor s = 1:length(subnamelist)
         anatDir=fullfile(subdir,'anat');
         subbasename=fullfile(anatDir,sprintf('%s_T1w',subid));
 
-        if ~exist([subbasename,'.iso-thickness_0-6mm.left.mid.cortex.dfs'],'file')
+        if ~exist([anatDir,'/atlas_fs_thickness.right.mid.cortex.svreg.dfs'],'file')
             try
-                thicknessISO(subbasename);
-                map_isothickness2atlas(subbasename);
+                thickness_freesurfer(subbasename);
+                map_fsthickness2atlas(subbasename)
             catch
                 fprintf('skippig subject %s',subbasename);
             end

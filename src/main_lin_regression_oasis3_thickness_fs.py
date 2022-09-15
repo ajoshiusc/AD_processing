@@ -41,7 +41,7 @@ def main():
     NUM_SUB = 3500  # Number of subjects for the study
 
     s = glob.glob(
-        "/home/ajoshi/projects/AD_processing/src/outputs/oasis3_bfp_mmse_pvc_iso_th_smooth.csv"
+        "/home/ajoshi/projects/AD_processing/src/outputs/oasis3_bfp_mmse_fs_th_smooth.csv"
     )
 
     measure = "mmse"
@@ -89,7 +89,7 @@ def main():
     vis_grayord_sigpval(
         pval=corr_pval,
         sig_alpha=0.05,
-        surf_name="thickness_pvc_iso_smooth" + str(smth),
+        surf_name="thickness_fs_smooth" + str(smth),
         out_dir="outputs",
         smooth_iter=0,
         bfp_path=BFPPATH,
@@ -98,7 +98,7 @@ def main():
     vis_grayord_sigpval(
         pval=corr_pval_fdr,
         sig_alpha=0.05,
-        surf_name="thickness_pvc_iso_smooth" + str(smth) + "fdr",
+        surf_name="thickness_fs_smooth" + str(smth) + "fdr",
         out_dir="outputs",
         smooth_iter=0,
         bfp_path=BFPPATH,

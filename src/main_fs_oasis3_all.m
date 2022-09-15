@@ -1,8 +1,6 @@
 clc;clear all;close all;restoredefaultpath;
 %addpath(genpath('/big_disk/ajoshi/coding_ground/bfp/supp_data'))
-addpath(genpath('/home/ajoshi/projects/svreg/src'));
-addpath(genpath('/home/ajoshi/projects/svreg/3rdParty'));
-
+addpath(genpath('/ImagePTE1/ajoshi/code_farm/bfp/src'));
 %    1050345 rest 2
 
 studydir='/ImagePTE1/ajoshi/data/bfp_oasis3';
@@ -53,26 +51,25 @@ for j=3:length(l)
     end
 end
 
-parpool(10);
+%Process all subjects using BFP
+parpool(16);
+GOrdSurfIndFile='/ImagePTE1/ajoshi/code_farm/bfp/supp_data/bci_grayordinates_surf_ind.mat';
+out_dir='/ImagePTE1/ajoshi/data/thickness_data/thickness_fs_th';
 parfor s = 1:length(subnamelist)
-%    try
+    try
         subid=[subnamelist{s},'_',sessionslist{s},'_',runlist{s}];
         subdir=fullfile(studydir,subid);
         anatDir=fullfile(subdir,'anat');
         subbasename=fullfile(anatDir,sprintf('%s_T1w',subid));
 
-        if ~exist([subbasename,'.iso-thickness_0-6mm.left.mid.cortex.dfs'],'file')
-            try
-                thicknessISO(subbasename);
-                map_isothickness2atlas(subbasename);
-            catch
-                fprintf('skippig subject %s',subbasename);
-            end
+        GOrdFile=fullfile(out_dir,[subid,'.fs_th.gord.mat']);
+        if ~exist(GOrdFile,'file') && exist([subbasename,'.left.mid.cortex.fs.dfs'],'file')
+            fs_th_gord(subbasename,GOrdSurfIndFile,GOrdFile);
         end
 
         %        bfp(configfile, t1list{s}, fmrilist{s}, studydir, [subnamelist{s},'_',sessionslist{s},'_',runlist{s}], 'rest',TR);
- %   catch 
+    catch 
         fprintf('subject done:%d  %s\n',s,subnamelist{s});
-  %  end
+    end
 end
 

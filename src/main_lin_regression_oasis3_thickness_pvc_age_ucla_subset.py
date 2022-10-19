@@ -42,7 +42,7 @@ def main():
     NUM_SUB = 3500  # Number of subjects for the study
 
     s = glob.glob(
-        "/home/ajoshi/projects/AD_processing/src/outputs/oasis3_bfp_mmse_pvc_th.csv"
+        "/home/ajoshi/projects/AD_processing/src/outputs/oasis3_bfp_mmse_pvc_th_smooth.csv"
     )
 
     measure = "Age"

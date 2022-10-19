@@ -7,13 +7,13 @@ import scipy.io as spio
 
 
 def read_oasis3_data(csv_fname,
-                       data_dir,
-                       reg_var_name='Age',
-                       num_sub=5,
-                       reg_var_positive=1,
-                       len_time=20,
-                       data_field='dtseries',
-                       good_subs_list=''):
+                     data_dir,
+                     reg_var_name='Age',
+                     num_sub=5,
+                     reg_var_positive=1,
+                     len_time=20,
+                     data_field='dtseries',
+                     good_subs_list=''):
     """ reads fcon1000 csv and data"""
 
     count1 = 0
@@ -21,9 +21,8 @@ def read_oasis3_data(csv_fname,
     reg_var = []
     pbar = tqdm(total=num_sub)
 
-    with open(good_subs_list,'r') as f:
+    with open(good_subs_list, 'r') as f:
         good_subids = f.read().splitlines()
-
 
     with open(csv_fname, newline='') as csvfile:
         creader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
@@ -39,13 +38,14 @@ def read_oasis3_data(csv_fname,
             if not os.path.isfile(fname):
                 continue
             num_v_t = spio.loadmat(fname)[data_field].shape
-    
+
             # Check if there are enough time points
-            if num_v_t[1]<len_time:
-                print(fname + ' doesn\'t have enough timepoints' + str(num_v_t[1]) + '/' + str(len_time))
+            if num_v_t[1] < len_time:
+                print(fname + ' doesn\'t have enough timepoints' +
+                      str(num_v_t[1]) + '/' + str(len_time))
                 continue
 
-            if len(rvar)==0 or (reg_var_positive == 1 and np.float64(rvar) < 0):
+            if len(rvar) == 0 or (reg_var_positive == 1 and np.float64(rvar) < 0):
                 continue
 
             if count1 == 0:
@@ -73,13 +73,11 @@ def read_oasis3_data(csv_fname,
     return sub_ids, sp.array(reg_var), sub_data_files
 
 
-
-
 def read_oasis3_SCT(csv_fname,
-                       data_dir,
-                       reg_var_name='Age',
-                       reg_var_positive=0,
-                       num_sub=5):
+                    data_dir,
+                    reg_var_name='Age',
+                    reg_var_positive=0,
+                    num_sub=5):
     """ reads fcon1000 csv and data"""
 
     count1 = 0
@@ -101,7 +99,7 @@ def read_oasis3_SCT(csv_fname,
             if not os.path.isfile(fname):
                 continue
 
-            if len(rvar)==0 or (reg_var_positive == 1 and np.float64(rvar) < 0):
+            if len(rvar) == 0 or (reg_var_positive == 1 and np.float64(rvar) < 0):
                 continue
 
             if count1 == 0:
@@ -114,7 +112,7 @@ def read_oasis3_SCT(csv_fname,
             reg_var.append(float(rvar))
 
             count1 += 1
-            pbar.update(1)  
+            pbar.update(1)
             # update the progress bar
             #print('%d,' % count1, end='')
             if count1 == num_sub:
@@ -125,16 +123,14 @@ def read_oasis3_SCT(csv_fname,
           (len(sub_ids)))
 
     return sub_ids, sp.array(reg_var), sub_data_files
-
-
 
 
 def read_oasis3_thickness(csv_fname,
-                       data_dir,
-                       reg_var_name='Age',
-                       reg_var_positive=0,
-                       num_sub=5,
-                       good_subs_list=''):
+                          data_dir,
+                          reg_var_name='Age',
+                          reg_var_positive=0,
+                          num_sub=5,
+                          good_subs_list=''):
     """ reads fcon1000 csv and data"""
 
     count1 = 0
@@ -142,11 +138,9 @@ def read_oasis3_thickness(csv_fname,
     reg_var = []
     pbar = tqdm(total=num_sub)
 
-    with open(good_subs_list,'r') as f:
+    with open(good_subs_list, 'r') as f:
 
         good_subids = f.read().splitlines()
-
-
 
     with open(csv_fname, newline='') as csvfile:
         creader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
@@ -160,9 +154,10 @@ def read_oasis3_thickness(csv_fname,
 
             # If the data does not exist for this subject then skip it
             if not os.path.isfile(fname):
+                print('file %s does not exist\n' % fname)
                 continue
 
-            if len(rvar)==0 or (reg_var_positive == 1 and np.float64(rvar) < 0):
+            if len(rvar) == 0 or (reg_var_positive == 1 and np.float64(rvar) < 0):
                 continue
 
             if count1 == 0:
@@ -178,7 +173,7 @@ def read_oasis3_thickness(csv_fname,
                 reg_var.append(float(rvar))
 
             count1 += 1
-            pbar.update(1)  
+            pbar.update(1)
             # update the progress bar
             #print('%d,' % count1, end='')
             if count1 == num_sub:
@@ -187,21 +182,16 @@ def read_oasis3_thickness(csv_fname,
     pbar.close()
     print('CSV file and the data has been read\nThere are %d subjects' %
           (len(sub_ids)))
-
-
 
     return sub_ids, sp.array(reg_var), sub_data_files
 
 
-
-
-
 def read_oasis3_ALFF(csv_fname,
-                       data_dir,
-                       reg_var_name='Age',
-                       reg_var_positive=0,
-                       num_sub=5,
-                       good_subs_list=''):
+                     data_dir,
+                     reg_var_name='Age',
+                     reg_var_positive=0,
+                     num_sub=5,
+                     good_subs_list=''):
     """ reads fcon1000 csv and data"""
 
     count1 = 0
@@ -209,11 +199,9 @@ def read_oasis3_ALFF(csv_fname,
     reg_var = []
     pbar = tqdm(total=num_sub)
 
-    with open(good_subs_list,'r') as f:
+    with open(good_subs_list, 'r') as f:
 
         good_subids = f.read().splitlines()
-
-
 
     with open(csv_fname, newline='') as csvfile:
         creader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
@@ -229,7 +217,7 @@ def read_oasis3_ALFF(csv_fname,
             if not os.path.isfile(fname):
                 continue
 
-            if len(rvar)==0 or (reg_var_positive == 1 and np.float64(rvar) < 0):
+            if len(rvar) == 0 or (reg_var_positive == 1 and np.float64(rvar) < 0):
                 continue
 
             if count1 == 0:
@@ -245,7 +233,7 @@ def read_oasis3_ALFF(csv_fname,
                 reg_var.append(float(rvar))
 
             count1 += 1
-            pbar.update(1)  
+            pbar.update(1)
             # update the progress bar
             #print('%d,' % count1, end='')
             if count1 == num_sub:
@@ -254,7 +242,5 @@ def read_oasis3_ALFF(csv_fname,
     pbar.close()
     print('CSV file and the data has been read\nThere are %d subjects' %
           (len(sub_ids)))
-
-
 
     return sub_ids, sp.array(reg_var), sub_data_files

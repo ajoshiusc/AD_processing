@@ -110,7 +110,7 @@ def main():
     print("Results saved")
     fig, axs = plt.subplots(1, 1, sharey=True, tight_layout=True)
     axs.hist(corr_val, bins=100)
-    plt.savefig('age_hist.png')
+    plt.savefig('age_hist_ucla_subset.png')
     plt.show()
     plt.close()
 

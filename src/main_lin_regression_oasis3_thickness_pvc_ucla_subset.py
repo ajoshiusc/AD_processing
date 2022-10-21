@@ -26,6 +26,7 @@ import time
 import glob
 import scipy as sp
 from scipy.stats import pearsonr
+import matplotlib.pyplot as plt
 
 
 BFPPATH = "/home/ajoshi/projects/bfp"
@@ -106,6 +107,12 @@ def main():
     )
 
     print("Results saved")
+
+    fig, axs = plt.subplots(1, 1, sharey=True, tight_layout=True)
+    axs.hist(corr_val, bins=100)
+    plt.savefig('mmse_hist_ucla_subset.png')
+    plt.show()
+    plt.close()
 
 
 if __name__ == "__main__":

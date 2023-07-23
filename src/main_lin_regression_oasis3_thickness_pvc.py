@@ -29,7 +29,7 @@ from scipy.stats import pearsonr
 import matplotlib.pyplot as plt
 
 
-BFPPATH = "/home/ajoshi/projects/bfp"
+BFPPATH = "/home/ajoshi/projects/BrainSuite/bfp"
 FSL_PATH = "/usr/share/fsl/5.0"
 # study directory where all the grayordinate files lie
 DATA_DIR = "/deneb_disk/bfp_oasis3"

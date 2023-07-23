@@ -18,6 +18,7 @@ __email__ = "ajoshi@sipi.usc.edu"
 import matplotlib.cm as cmx
 import matplotlib.colors as colors
 
+np.bool = np.bool_ # THIS IS TO GET RID OF ERROR IN VTK
 
 def surf_weight(surf1):
     X = surf1.vertices[:, 0]

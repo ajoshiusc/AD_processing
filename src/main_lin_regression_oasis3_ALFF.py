@@ -28,7 +28,7 @@ import scipy as sp
 from scipy.stats import pearsonr
 
 
-BFPPATH = "/home/ajoshi/projects/bfp"
+BFPPATH = "/home/ajoshi/projects/BrainSuite/bfp"
 FSL_PATH = "/home/ajoshi/webware/fsl"
 # study directory where all the grayordinate files lie
 DATA_DIR = "/deneb_disk/bfp_oasis3"
@@ -39,7 +39,7 @@ NUM_VERT = 96854
 def main():
     NUM_SUB = 3500  # Number of subjects for the study
 
-    s = glob.glob("/home/ajoshi/projects/AD_processing/src/outputs/oasis3_bfp_falff_smooth.csv")
+    s = glob.glob("/home/ajoshi/projects/AD_processing/src/outputs/oasis3_bfp_alff_z_smooth.csv")
 
     measure = "mmse"
     CSV_FILE = s[0]
@@ -57,7 +57,7 @@ def main():
     ind_mapping = map(sub_files.__getitem__, ind)
     sub_files = list(ind_mapping)
     reg_var = reg_var[ind]
-    #reg_var = np.random.permutation(reg_var)
+    reg_var = np.random.permutation(reg_var)
 
     NUM_SUB = len(sub_files)
     ALFF_all = np.zeros((NUM_VERT, NUM_SUB))
@@ -86,7 +86,7 @@ def main():
     vis_grayord_sigpval(
         pval=corr_pval,
         sig_alpha=0.05,
-        surf_name="fALFF_smooth",
+        surf_name="alff_z_smooth",
         out_dir="outputs",
         smooth_iter=0,
         bfp_path=BFPPATH,
@@ -95,7 +95,7 @@ def main():
     vis_grayord_sigpval(
         pval=corr_pval_fdr,
         sig_alpha=0.05,
-        surf_name="fALFF_smooth_fdr",
+        surf_name="alff_z_smooth_fdr",
         out_dir="outputs",
         smooth_iter=0,
         bfp_path=BFPPATH,

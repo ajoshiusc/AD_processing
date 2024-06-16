@@ -183,7 +183,7 @@ def read_oasis3_thickness(csv_fname,
     print('CSV file and the data has been read\nThere are %d subjects' %
           (len(sub_ids)))
 
-    return sub_ids, sp.array(reg_var), sub_data_files
+    return sub_ids, np.array(reg_var), sub_data_files
 
 
 def read_oasis3_ALFF(csv_fname,

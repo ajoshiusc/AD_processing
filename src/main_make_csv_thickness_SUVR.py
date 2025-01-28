@@ -49,6 +49,8 @@ all_suvr = df1[measure]
 pet_available = 0
 pet_not_available = 0
 
+pet_positives = 0
+
 for i, s in enumerate(sub_mr_ids):
 
     # check if the all_suvr has s index
@@ -61,10 +63,13 @@ for i, s in enumerate(sub_mr_ids):
 
     data_suvr[i] = np.mean(all_suvr[s])
 
+    if data_suvr[i] > 1.42:
+        pet_positives += 1
+
 
 print(f"pet available: {pet_available}")
 print(f"pet not available: {pet_not_available}")
-
+print(f"pet positives: {pet_positives}")
 
 data1 = pd.DataFrame(index=sub_ids, data={"sess":session_id, "M/F": data1, measure: data_suvr,"FileName": gord_fname_list})
 data1.index.name = "Subject"

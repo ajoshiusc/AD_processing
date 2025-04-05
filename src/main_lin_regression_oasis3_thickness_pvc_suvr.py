@@ -45,7 +45,7 @@ def main():
     s = glob.glob(csv_file)
     
 
-    measure = "suvr_avg" #"mmse_avg"
+    measure = "closest_day_suvr_value" #"mmse_avg"
     CSV_FILE = s[0]
 
     _, reg_var, sub_files = read_oasis3_thickness(

@@ -66,6 +66,8 @@ for s in sub_ids:
     suvr_values["suvr_avg"].append(suvr_avg)
 
 
+d = {"FileName": gord_fname_list}
+
 # initialize df as datadrame
 df2 = pd.DataFrame(
     index=sub_ids,
@@ -83,6 +85,7 @@ df2 = pd.DataFrame(
         "closest_day_mmse_value",
         "closest_day_cdr_value",
         "closest_day_suvr_value",
+        "FileName"
     ],
 )
 
@@ -111,6 +114,7 @@ df2["closest_suvr_day"] = np.nan
 df2["closest_day_mmse_value"] = np.nan
 df2["closest_day_cdr_value"] = np.nan
 df2["closest_day_suvr_value"] = np.nan
+df2["Filename"] = gord_fname_list
 
 for s in sub_ids:
 

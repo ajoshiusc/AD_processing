@@ -113,8 +113,8 @@ def label_surf(pval, colorbar_lim, smooth_iter, colormap, bfp_path='.'):
     lsurf = readdfs(os.path.join(bfp_path, 'supp_data/bci32kleft.dfs'))
     rsurf = readdfs(os.path.join(bfp_path, 'supp_data/bci32kright.dfs'))
     num_vert = lsurf.vertices.shape[0]
-    lsurf.attributes = sp.zeros((lsurf.vertices.shape[0]))
-    rsurf.attributes = sp.zeros((rsurf.vertices.shape[0]))
+    lsurf.attributes = np.zeros((lsurf.vertices.shape[0]))
+    rsurf.attributes = np.zeros((rsurf.vertices.shape[0]))
 
     if VTK_INSTALLED:
         # smooth surfaces
@@ -154,7 +154,7 @@ def save2volbord_bci(data, outfile, bfp_path='.', smooth_std=0):
     v2.to_filename(outfile)
 
 
-def save2volgord_bci(data, out_dir, vol_name, bfp_path='.', fsl_path=FSL_PATH, default_value=0, bst_path='/home/ajoshi/BrainSuite21a'):
+def save2volgord_bci(data, out_dir, vol_name, bfp_path='.', fsl_path=FSL_PATH, default_value=0, bst_path='/home/ajoshi/Software/BrainSuite21a'):
 
     vol = load_img(
         join(bst_path, 'svreg', 'BCI-DNI_brain_atlas', 'BCI-DNI_brain.nii.gz'))
@@ -204,11 +204,11 @@ def save2surfgord(lsurf,
     lab = spio.loadmat(
         os.path.join(bfp_path, 'supp_data/USCBrain_grayordinate_labels.mat'))
     labs = lab['labels'].squeeze()
-    labs = sp.float64(labs)
-    lsurf.attributes[labs[:num_vert] == 0] = sp.nan
-    rsurf.attributes[labs[num_vert:2 * num_vert] == 0] = sp.nan
-    lsurf.vColor[sp.isnan(lsurf.attributes), :] = 0
-    rsurf.vColor[sp.isnan(lsurf.attributes), :] = 0
+    labs = np.float64(labs)
+    lsurf.attributes[labs[:num_vert] == 0] = np.nan
+    rsurf.attributes[labs[num_vert:2 * num_vert] == 0] = np.nan
+    lsurf.vColor[np.isnan(lsurf.attributes), :] = 0
+    rsurf.vColor[np.isnan(lsurf.attributes), :] = 0
 
     writedfs(out_dir + '/Right_' + surf_name + '.dfs', rsurf)
     writedfs(out_dir + '/Left_' + surf_name + '.dfs', lsurf)

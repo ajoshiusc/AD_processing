@@ -54,7 +54,7 @@ def surf_weight(surf1):
 
 def patch_color_labels(s,freq=[1],cmap='Paired', shuffle=True):
     ''' color by freq of labels '''
-    s.vColor = sp.zeros(s.vertices.shape)
+    s.vColor = np.zeros(s.vertices.shape)
     _, labels = sp.unique(s.labels, return_inverse=True)
     labels += 1
     colr = get_cmap(sp.amax(labels)+1,cmap=cmap)
@@ -77,7 +77,7 @@ def patch_color_attrib(s,values=[],cmap='jet', clim=[0]):
         vmin = clim[0]; vmax = clim[1]
 
 
-    s.vColor = sp.zeros(s.vertices.shape)
+    s.vColor = np.zeros(s.vertices.shape)
     color_norm  = colors.Normalize(vmin=vmin,vmax=vmax)
     scalar_map = cmx.ScalarMappable(norm=color_norm, cmap=cmap)
     s.vColor = scalar_map.to_rgba(values)
@@ -566,7 +566,7 @@ def smooth_patch(surf, iterations=15, relaxation=0.1):
     faces1 = surf1.GetPolys()
     f1 = faces1.GetData()
     f2 = vtk_to_numpy(f1)
-    f2 = f2.reshape(sp.int16(len(f2) / 4), 4)
+    f2 = f2.reshape(np.int32(len(f2) / 4), 4)
 
 
 

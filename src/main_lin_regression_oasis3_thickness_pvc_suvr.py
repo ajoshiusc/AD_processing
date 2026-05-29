@@ -16,7 +16,7 @@ from statsmodels.stats.multitest import fdrcorrection
 from stats_utils import randpairs_regression
 
 # from dev_utils import read_fcon1000_data
-from utils_oasis3 import read_oasis3_thickness
+from utils_oasis3 import read_oasis3_thickness_mmse_suvr
 from grayord_utils import visdata_grayord, vis_grayord_sigpval
 
 # ### Set the directorie
@@ -45,22 +45,18 @@ def main():
     s = glob.glob(csv_file)
     
 
-    measure = "closest_day_suvr_value" #"mmse_avg"
     CSV_FILE = s[0]
 
-    _, reg_var, sub_files = read_oasis3_thickness(
+    _, reg_var_mmse, reg_var_suvr, sub_files = read_oasis3_thickness_mmse_suvr(
         csv_fname=CSV_FILE,
-        data_dir=DATA_DIR,
-        reg_var_name=measure,
-        reg_var_positive=True,
+        good_subs_list='good_subids.txt',
         num_sub=NUM_SUB,
-        good_subs_list='good_subids.txt'
     )
 
-    ind = np.where(reg_var > 0*25)[0]
+    ind = np.where((reg_var_mmse > 24))[0]
     ind_mapping = map(sub_files.__getitem__, ind)
     sub_files = list(ind_mapping)
-    reg_var = reg_var[ind]
+    reg_var = reg_var_suvr[ind]
     #reg_var = np.random.permutation(reg_var)
 
     NUM_SUB = len(sub_files)

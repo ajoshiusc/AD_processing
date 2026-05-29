@@ -1,0 +1,491 @@
+%% 
+%% Copyright 2007-2020 Elsevier Ltd
+%% 
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%% 
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%% 
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%% 
+
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%% SP 2008/03/01
+%%
+%% 
+%%
+%% $Id: elsarticle-template-num.tex 190 2020-11-23 11:12:32Z rishi $
+%%
+%%
+%%\documentclass[preprint,12pt]{elsarticle}
+\documentclass[review,3p,times,12pt,letterpaper]{elsarticle}
+%\documentclass[review]{elsarticle}
+
+% Use the endfloat package to move captions to the end
+%\usepackage[figuresonly,nolists]{endfloat}
+%\renewcommand{\efloatseparator}{\mbox{}}
+
+%\documentclass[final,5p,times]{elsarticle}
+
+%% Use the option review to obtain double line spacing
+%% \documentclass[authoryear,preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%% \documentclass[final,1p,times]{elsarticle}
+%% \documentclass[final,1p,times,twocolumn]{elsarticle}
+%%\documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%% \documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% For including figures, graphicx.sty has been loaded in
+%% elsarticle.cls. If you prefer to use the old commands
+%% please give \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+%%\usepackage{amssymb}
+\usepackage{wrapfig}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+\usepackage{comment}
+
+\usepackage{url}
+\usepackage{xcolor}
+\newcommand{\dws}[1]{{\color{red} [#1]}} 
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers.
+\usepackage{lineno}
+\linenumbers
+
+\journal{Journal of Alzheimer's Disease (Draft)}
+
+\begin{document}
+\begin{frontmatter}
+% Title Page
+\begin{titlepage}
+    \centering
+    \Large\textbf{Motor Network Impairment as a Potential Early Biomarker for Alzheimer's Disease}\\[20pt]
+
+    \large
+    Anand A. Joshi\textsuperscript{1}\corref{cor1}, Ronald Salloum\textsuperscript{3}, Richard M. Leahy\textsuperscript{1}, Daniel J. Tward\textsuperscript{2}, David W. Shattuck\textsuperscript{2}, Abhijit J. Chaudhari\textsuperscript{4}  \\[10pt]
+
+    \normalsize
+    \textsuperscript{1}University of Southern California, Los Angeles, 90089, CA, USA\\
+    \textsuperscript{2}University of California Los Angeles, Los Angeles, 90089, CA, USA\\
+    \textsuperscript{3}California State University, San Bernardino, San Bernardino, 92407, CA, USA\\
+    \textsuperscript{4}University of California Davis, Davis, 95616, CA, USA\\
+    [30pt]
+
+    \Large\textbf{Corresponding Author Information}\\[10pt]
+    \large
+    \textbf{Name:} Anand A. Joshi, Ph.D. \\
+    \textbf{Address:} 3740 McClintock Ave, Suite 426 \\
+    Los Angeles, California, 90089-2564 
+    USA \\
+    \textbf{Email:} \texttt{ajoshi@usc.edu} \\
+    \textbf{Phone:} +1 (213) 284 4971\\[15pt]
+
+\large
+    \Large\textbf{Running Title:}
+    \large
+     Motor Network Impairment as Early AD Biomarker \\
+    
+\end{titlepage}
+
+%% Title, authors and addresses
+
+%% use the tnoteref command within \title for footnotes;
+%% use the tnotetext command for theassociated footnote;
+%% use the fnref command within \author or \address for footnotes;
+%% use the fntext command for theassociated footnote;
+%% use the corref command within \author for corresponding author footnotes;
+%% use the cortext command for theassociated footnote;
+%% use the ead command for the email address,
+%% and the form \ead[url] for the home page:
+%%\title{Title\tnoteref{label1}}
+%% \tnotetext[label1]{}
+%%\author{Name\corref{cor1}\fnref{label2}}
+%%\ead{email address}
+%% \ead[url]{home page}
+%% \fntext[label2]{}
+%%\cortext[cor1]{}
+%%affiliation{organization={},
+%%             addressline={},
+%%             city={},
+%%             postcode={},
+%%             state={},
+%%             country={}}
+%%\fntext[label3]{}
+
+
+\title{Motor Network Impairment as a Potential Early Biomarker for Alzheimer's Disease}
+
+
+\author[inst1]{Anand A. Joshi\corref{cor1}}
+\author[inst3]{Ronald Salloum}
+\author[inst1]{Richard M. Leahy}
+\author[inst2]{Daniel J. Tward}
+\author[inst2]{David W. Shattuck}
+\author[inst4]{Abhijit J. Chaudhari}
+
+% Corresponding author footnote
+\cortext[cor1]{\textbf{Corresponding author:} Anand A. Joshi. 
+Postal address: Ming Hsieh Department of Electrical and Computer Engineering, 
+3740 McClintock Avenue, EEB 426, Los Angeles, CA, 90089-2560, USA. 
+Email: \texttt{ajoshi@usc.edu}}
+
+
+\affiliation[inst1]{organization={University of Southern California},%Department and Organization
+            %%addressline={}, 
+            city={Los Angeles},
+            postcode={90089}, 
+            state={CA},
+            country={USA}}
+
+\affiliation[inst2]{organization={University of California Los Angeles},%Department and Organization
+            %%addressline={}, 
+            city={Los Angeles},
+            postcode={90089}, 
+            state={CA},
+            country={USA}}
+
+\affiliation[inst3]{organization={California State University, San Bernardino},%Department and Organization
+            %%addressline={}, 
+            city={San Bernardino},
+            postcode={92407}, 
+            state={CA},
+            country={USA}}
+            
+\affiliation[inst4]{organization={University of California Davis},%Department and Organization
+            %%addressline={}, 
+            city={Davis},
+            postcode={95616}, 
+            state={CA},
+            country={USA}}
+
+\begin{abstract}
+\textbf{Background}: Compared to age-matched controls, individuals with advanced Alzheimer's Disease (AD) are known to exhibit jerky, less coordinated hand movements and need more time to initiate and execute hand tasks. Preclinical/early AD may impact motor networks, but neuroplasticity can mask this effect, making it occult in behavioral studies. Neuroimaging may reveal these deficits. \newline
+\textbf{Objectives}: The objective of this study is to use neuroimaging data to investigate motor network impairment as a potential early biomarker for Alzheimer's disease. \newline
+\textbf{Methods}: From OASIS-3, which is a neuroimaging study of healthy aging and AD cohorts, we considered a cognitively normal (Mini-Mental State Exam (MMSE) $>$ 24) sub-population that may represent the early stages of  AD. In this sub-population, we computed the association of cortical thickness and rs-fMRI-based cortical and network measures with MMSE scores. \newline
+\textbf{Results}: Our analysis showed that the motor cortex and networks associated with manual dexterity and motor function are affected in this population. \newline
+\textbf{Conclusions}: Future studies should consider using manual dexterity paradigms during task-fMRI scans instead of resting-state acquisitions to better understand the relationship between motor deficits, AD, and cognitive decline.
+%%\dws{The title asks a question -- and the abstract doesn't answer it. I think it might be good to conclude with a final sentence on the implications of the findings of the study.}
+%% A new sentence is added -- AAJ/RS
+%% Text of abstract
+
+\end{abstract}
+
+\begin{keyword}
+Alzheimer Disease \sep Motor Cortex \sep Cerebral Cortex \sep Neuroimaging \sep Magnetic Resonance Imaging
+
+
+
+%% keywords here, in the form: keyword \sep keyword
+%% PACS codes here, in the form: \PACS code \sep code
+%% MSC codes here, in the form: \MSC code \sep code
+%% or \MSC[2008] code \sep code (2000 is the default)
+
+\end{keyword}
+
+
+\begin{comment}
+%%Graphical abstract
+\begin{graphicalabstract}
+%\includegraphics{grabs}
+\end{graphicalabstract}
+
+%%Research highlights
+\begin{highlights}
+\item Research highlight 1
+\item Research highlight 2
+\end{highlights}
+\end{comment}
+
+
+
+
+
+\end{frontmatter}
+
+%% \linenumbers
+
+%% main text
+
+\begin{comment}
+\section{Notes}
+Resting-state functional MRI provides insights
+
+The text in the paper is based on
+\url{https://uscedu-my.sharepoint.com/:w:/r/personal/ajoshi_usc_edu/Documents/dropbox_backup_2021/R01_Nov_2021_AD_Motor/Specific_Aims_Research_Strategy_FINAL.docx?d=w143f4137efe54fd0bdeeae4c25deb19e&csf=1&web=1&e=oPIbJi}
+
+\url{https://docs.google.com/presentation/d/1jlVuNVwcMI8xD_9Hh3uPPCGo4meUB2uPvmMya-mLWs4/edit?usp=sharing}\\
+https://alzres.biomedcentral.com/articles/10.1186/s13195-018-0459-7/tables/1\\
+https://www.sciencedirect.com/journal/neuroimage-reports
+
+*Add a histogram of MMSE scores for the study population.
+\end{comment}
+
+\section*{BACKGROUND}
+\label{sec:intro}
+
+Alzheimer’s disease (AD) is the sixth leading cause of death among all adults in the United States and a leading cause of morbidity. Early diagnosis of AD may allow for disease modification and reduce medical and associated costs. Preclinical AD \cite{sperling_toward_2011} starts the day that pathological AD lesions appear without any clinical symptoms \cite{dubois_preclinical_2016} and therefore precedes mild cognitive impairment (MCI). Biomarkers of preclinical AD have become a major area of research, with the recognition that intervention during this phase could present an opportunity to alter the course of the disease \cite{parnetti_prevalence_2019}. 
+
+Motor dysfunction is well-documented in the very early stages of AD neuropathology \cite{camicioli_motor_1998,watson_executive_2010}, with motor assessments showing sensitivity that is comparable to that of traditional tests of cognitive function \cite{kluger_patterns_1997,rycroft_relationship_2019}. Furthermore, motor changes have been shown to predict future cognitive and functional decline \cite{wilson_parkinsonianlike_2003,buchman_grip_2007}. Amyloid-$\beta$ ($A\beta$) deposition and neurofibrillary tangles have been found in the primary motor cortex and supplementary motor areas in early AD \cite{arnold_topographical_1991}. Interventions targeting amelioration of motor deficits in AD have been shown to enhance patient function \cite{scarmeas_motor_2005,smallfield_effectiveness_2017}. Finally, AD risk genes, such as PS1 and ApoE-$\epsilon4$, are also associated with motor symptoms \cite{lazarov_impairments_2007,buchman_apolipoprotein_2009}. Thus, published studies demonstrate that motor regions are affected by AD neuropathology. Still, there is a paucity of data that would help elucidate the impact on motor networks of preclinical AD, where there could be the opportunity to introduce interventions \cite{buchman2011loss}.
+
+Manual dexterity, defined as the ability to make coordinated hand movements, is fundamental to our interactions with our physical, social, and cultural environment \cite{kreutzer_manual_2011}. Fine motor movement involving the hand and fingers requires an integration of motor control and coordination. Early AD pathology and aging could disrupt this integration, leading to diminished manual dexterity \cite{liou_hand_2020}. The motor system is often subdivided into (1) the pyramidal system \cite{brooks_motor_1971,braak_ratio_1986}, which is responsible for voluntary skilled movements such as precise movement of the fingers; and (2) the extrapyramidal system \cite{de_oliveira-souza_unbearable_2012}, which is primarily responsible for involuntary movements,  locomotion, and postural control. Pyramidal-type motor functions are significantly engaged for dexterous tasks that entail cognitive function (psychomotor functions \cite{hindmarch_psychomotor_1981}) including simple motor control \cite{smith_critical_1999}, finger coordination \cite{shinohara_effects_2003}, finger tapping \cite{ruff_gender-_1993}, gripping \cite{frederiksen_age_2006}, and holding a pen \cite{brooks_motor_1971}. Compared to motor systems controlling locomotion and posture, those controlling dexterous hand movements developed relatively late during evolution and are far more sensitive to neuropathology \cite{isa_dexterous_2019}. While AD neuropathology has been shown to impact both pyramidal and extrapyramidal neurons \cite{braak_ratio_1986,mann_pyramidal_1996,yan_alzheimers_2008,albers_at_2015}, functional deficits in fine motor tasks, especially those involving the hand, occur earlier than deficits in gross motion \cite{smith_aging_1999,hoogendam_older_2014}. These deficits are also significantly accelerated in early AD compared to age-matched controls \cite{smith_critical_1999,ward_age-related_2003,yan_alzheimers_2008,de_paula_impairment_2016}. Particularly, altered finger-tapping patterns have been associated with progressive cognitive decline \cite{camicioli_motor_1998,wilson_parkinsonianlike_2003,roalf_quantitative_2018}. In a study excluding patients with any extrapyramidal symptoms (incipient Parkinson’s disease or Dementia with Lewy Body), it was shown that AD alone was associated with motor deficits manifested by jerky and less coordinated hand movements \cite{goldman_motor_1999}. Topographic and spectral changes in electrophysiological activity in motor regions (via electroencephalography and magnetoencephalography) associated with hand function have also shown a correlation with AD progression \cite{babiloni_mapping_2004,salustri_sensorimotor_2013}. Lastly, a longitudinal study examining motor signs in initially cognitively healthy adults observed the slowing of finger tapping speed at or near the onset of cognitive impairment \cite{buracchio_trajectory_2010}. These observations support the notion that motor and cognitive symptoms may follow a similar trajectory in AD pathogenesis \cite{kluger_motorpsychomotor_1997,vidoni_evidence_2012}. 
+
+The functional MRI signal acquired during rest (rs-fMRI) has been used extensively to measure functional connectivity between different brain regions. It is also widely used for longitudinal studies of brain development and as a diagnostic biomarker in cross-sectional studies for various neurological and psychological diseases and conditions including AD \cite{dennis2014functional}, particularly in the later stages of the disease. 
+
+There is a notable neuronal loss in AD, leading to alterations in cortical thickness and subcortical structure morphology. The changes in the cortical thickness in various brain regions have consistently been linked with AD, especially in the advanced stages of the disease \cite{lerch2005focal}.
+
+In this study, we analyzed MRI scans (structural and fMRI) from a preclinical sub-population of subjects that were part of a longitudinal neuroimaging study (OASIS-3) with Mini-Mental State Examination (MMSE) scores within the normal cognitive range. The top score for the MMSE is 30. A score of higher than 24 may imply normal cognition, while a score below 24 could mean cognitive impairment. We assessed the anatomical (point-wise cortical thickness) and functional (resting-state fMRI) impact on motor regions and networks associated with manual dexterity and their association with MMSE scores. Here, our focus is on the cognitively normal sub-population (MMSE $>$ 24) that represents the early stages of the disease to see if there are early alterations in cortical thickness or functional measures derived from rs-fMRI, especially in the motor regions. We performed four different analyses: (1) point-wise correlation analysis of cortical thickness and MMSE score; (2) correlation of MMSE score and amplitude of low-frequency fluctuations (ALFF) \cite{zuo2010oscillating}; (3) correlation of MMSE and brain connectivity computed from rs-fMRI; and (4) pairwise regression of the MMSE score with rs-fMRI. 
+
+%Abnormalities in ALFF that correlate with MMSE might indicate brain regions affected by early AD.
+
+
+\section*{MATERIALS AND METHODS}
+
+%\subsection{MRI data description}
+\label{sec:matand_meth}
+\begin{comment}
+We obtained structural and rs-fMRI scans and associated neuropsychological measures from the OASIS-3 dataset
+[5]. We considered a subpopulation of 350 subjects from this OASIS-3 database. The structural and rs-fMRI data
+for these subjects were processed using BrainSuite fMRI pipeline (BFP) [9].
+We first evaluated the impact of AD neuropathology on motor networks. For this analysis, we split the scans based
+on their Mini Mental State Examination (MMSE) score into two groups; MMSE score = 26-28.9 (early AD) and
+MMSE>29 (healthy controls). We then created association matrices of resting-state functional connectivity
+(correlation between ROIs) between 8 motor regions for each of the groups. Left and right correlation matrices
+were averaged to get each subject's motor connectivity matrix. These results are presented in Figure 1, alongside
+a group comparison map, showing a significant difference (decrease) in functional connectivity between motor
+regions. There results therefore suggest that early AD pathology impacts motor networks of relevance to manual
+dexterity.
+Additionally, we used the BrainSync transform [3] to perform the pairwise regression [4] of the MMSE score with rs-
+fMRI. This involved taking pairs of scans at a time from the study population, and then correlating the L2
+differences in their synchronized rs-fMRI time-series with the differences in MMSE scores at each point on the
+cortex. The pairwise regression to MMSE (results in Figure 2) showed an association of MMSE with frontal, and
+parietal brain and also to some extent to the temporal lobe. The correlation to the post-central gyrus was 0.10
+(average) and 0.31 (peak). Therefore, these results indicate an association of MMSE to motor regions impacted by
+manual dexterity.
+
+\end{comment}
+
+
+
+\subsection*{Data}
+%\dws{why have a second data section? this repeats details that are in the overview, which is the preceding paragraph}
+%We analyzed structural MRI and resting-state fMRI (rs-fMRI) data for a sub-population of 350 subjects from the OASIS-3 (Open Access Series of Imaging Studies) \cite{lamontagne2019oasis} database who had MMSE scores $>$ 25 (normal cognition).
+OASIS-3 is a large open-access imaging dataset focused on preclinical and early Alzheimer's disease \cite{lamontagne2019oasis, OASIS-3}. MRI data, dementia status, APOE status, and longitudinal clinical and cognitive outcomes are available for the participant cohort of 1098+ individuals. MRI data were collected on 3 different Siemens scanner models: Vision 1.5T (16 channel head coil), TIM Trio 3T (2 different scanners of this model) (20 channel head coil), and BioGraph mMR PET-MR 3T (20 channel head coil). For rs-fMRI, 6-minute eyes-open resting state BOLD scans were acquired. The detailed scan parameters are available for download from OASIS-3 \cite{lamontagne2019oasis, OASIS-3}.
+ 
+%\dws{give some specifics about the MRI data -- T1w, rs-fmri, sequences, etc.}
+
+A standardized visit structure was not maintained across the duration of the data collection in OASIS-3. The imaging data from the first available scan visits was used as it represented the most complete set available across the most number of individuals. 
+%Data is collected over 10 years with approximately yearly imaging, but most subjects have only 1-3 scans.
+To provide the most complete dataset, the association between clinical assessment and imaging visits was not mandated. OASIS-3 investigators vary in criterion used to combine imaging and assessments into a visit, i.e., clinical assessment within every 6 months (most common). 
+In this paper, the range of MMSE considered is relatively narrow, and since MMSE tends to be noisy on a single test, the MMSE averaged over multiple repetitions of the test was considered. Henceforth, in the paper, MMSE refers to average MMSE (over visits).
+
+
+We randomly selected a sub-population of 350 subjects with MMSE $>$ 24 (normal-cognition). Characteristics of the population are shown in Figure \ref{fig:demographics}. We retrieved the MRI data and other variables for these subjects from the OASIS-3 database.
+
+\begin{figure}
+\centering
+\includegraphics[width=1\linewidth]{oasis_demographics_v4.pdf} 
+\caption{Summary of demographics of the study population. The male/female ratio, as well as the distributions of MMSE scores and age, are shown. Note that in the paper, MMSE is averaged over multiple visits, and hence, is not necessarily integer-valued.
+%\dws{can you split the histogram bars into male/female? aren't MMSE scores integers? the histogram bins should be integer values.}
+}
+\label{fig:demographics}
+\end{figure}
+%\dws{the description here is a bit jumbled -- you have BFP described first, but it requires that BrainSuite be run first -- why not describe it in Resting state fMRI analysis below?}
+
+\subsubsection*{\normalfont\underline{Human Subject Data and Ethical Compliance}}
+This study utilized pre-collected open-access data from the OASIS-3 database \cite{lamontagne2019oasis}. As mentioned in \cite{lamontagne2019oasis}, all necessary patient/participant consent was obtained, and the appropriate institutional forms were archived.
+
+
+
+
+\subsection*{Image processing}
+\begin{comment}
+BFP is a BrainSuite's software workflow that processes fMRI and T1W data using a combination of software tools that include BrainSuite (\url{https://brainsuite.org}), 
+%AFNI \cite{cox2012afni,cox1996afni},
+%(\url{https://afni.nimh.nih.gov}), 
+FSL \cite{jenkinson2012fsl, smith2004advances}, %(\url{https://www.fmrib.ox.ac.uk/fsl}), 
+and MATLAB scripts. Unique features of the BFP pipeline include surface-constrained volumetric registration \cite{joshi2007surface, joshi_method2012}, global PDF-based non-local means filtering (GPDF) \cite{Li_2020_MedImageAnal_Temporal,gpdf_jianli2018}, and BrainSync alignment of rs-fMRI time-series \cite{JOSHI2018740,joshi2017brainsync}. 
+\end{comment}
+
+\subsubsection*{\normalfont\underline{Anatomical MRI processing}}
+We processed the T$_1$-weighted (T$_1$w) images using the BrainSuite Anatomical Pipeline (BAP)  \cite{shattuck_brainsuite_2002}. This pipeline includes a multi-step cortical extraction sequence that begins with  skull stripping, bias field correction, and voxel-wise classification of tissue types with estimation of partial volumes. This was followed by identification of the cerebrum and the generation of a triangular surface mesh that models the inner cortical surface, which is the boundary between the cortical grey matter and the underlying white matter. This mesh was then expanded to identify the pial cortical boundary, i.e., the outer cortical surface.
+The anatomical pipeline then computed cortical thickness using an approach based on an anisotropic diffusion equation that explicitly accounts for partial tissue volumes \cite{joshi2018using}. This method thus provides higher accuracy than other conventional methods that rely on inner and pial cortical surface mesh representations.
+
+The outputs of the cortical surface extraction sequence were aligned to the USCBrain atlas \cite{joshi2022hybrid} using our Surface-constrained Volumetric Registration method (SVReg) \cite{joshi_method_2012}. 
+The USCBrain atlas is a single-subject atlas, constructed using both anatomical and functional information to guide the parcellation of the cortex. It consists of standard anatomical cortical regions, further subdivided using rs-fMRI data \cite{joshi2022hybrid}. The USCBrain atlas includes a T$_1$w image labeled with 159 regions of interest (ROIs), including 130 cortical and 29 noncortical ROIs. It also includes a corresponding set of cortical surface maps that have the same 130 cortical ROIs. 
+The SVReg method first produces a mapping between the cortical surfaces of the atlas and subject, which is then maintained during a volumetric registration process. This ensures a consistent set of mappings between the cortical surface meshes of the atlas and subject, as well as the image volumes.  Once each subject's data has been mapped to the USCBrain atlas, the ROI labels can be mapped back to the subject's MRI to label the neuroanatomy in the native space. This mapping was also used to map the subject-level cortical thickness maps to the atlas cortical surface, thereby enabling a common space in which cortical thickness could be compared.
+
+
+\subsubsection*{\normalfont\underline{Functional processing}}
+\noindent\textbf{Time-series processing:}
+We applied the BrainSuite Functional Pipeline (BFP) to process the rs-fMRI time-series data. BFP uses software components from BrainSuite, FSL \cite{jenkinson2012fsl}, and AFNI \cite{cox2012afni} to process fMRI data.
+The fMRI processing includes motion correction, skull stripping, grand mean scaling \cite{gavrilescu2002simulation}, temporal filtering, detrending, spatial smoothing, and nuisance signal regression. The fMRI data are then registered to the corresponding T$_1$w image for each subject, and then transformed to the USCBrain atlas using the transform computed by the BAP. This produced, for each subject, a set of processed fMRI data that are represented in the surface and volume space of the BrainSuite's USCBrain atlas, as well as in the grayordinate-space defined by the Human Connectome Project \cite{glasser2013minimal}. The grayordinate representation is a standardized common space that contains cortical surface vertices and subcortical volume voxels. In this representation, the cerebral cortex is modeled as a surface mesh, and the globular subcortical nuclei are modeled as volume parcels.
+The statistical analysis for this work was performed in this grayordinate space (see Sec. \ref{sec:statanalysis}).
+%From the preprocessed fMRI time-series, we computed the ALFF measure and the ROI-wise brain connectivity represented by the Pearson correlation matrix, as described below.
+
+
+\noindent\textbf{Amplitude of low-frequency fluctuation (ALFF):}
+We computed the amplitude of low-frequency fluctuation (ALFF) measure from the outputs of BFP.
+ALFF \cite{zuo2010oscillating} is an rs-fMRI-based measure that is used to detect regional spontaneous slow fluctuations in the BOLD signal. Electrophysiological studies \cite{cordes2001frequencies} have shown that low-frequency oscillations may arise from spontaneous neuronal activity manifesting in the rhythmic coactivation of the brain regions due to the interaction between connected brain regions. We implemented ALFF in BFP using a sequence of programs from FSL to compute the power spectrum. We computed the z-transformed ALFF (ALFF-Z) by measuring the power between high and low-frequency band thresholds and normalizing by the average and standard deviation. We chose high and low-frequency cutoffs of 0.01 Hz and 0.1 Hz, respectively. The ALFF measure was first computed in the native space of each subject's fMRI data and then transformed to the subject's T$_1$w MRI coordinates. These data were first resampled to the midcortical surfaces extracted using BrainSuite. The data were then mapped to the USCBrain atlas using the transform computed by the BrainSuite Anatomical Pipeline. Finally, the data were transformed to the grayordinate space using BFP using the grayordinates defined in the USCBrain atlas space. For each subject, this produced a map of ALFF-Z at each point in the grayordinate space. 
+
+
+\noindent\textbf{ROI-based connectivity measures:} 
+We computed ROI-based connectivity measures for each subject by first computing the average of the fMRI time-series within each ROI defined by the USCBrain atlas. We then computed the Pearson's correlation between the ROI-averaged fMRI time-series for the 8 motor ROIs listed in Fig. \ref{fig:motor_networks_rois}(a). This resulted in association matrices indicating functional connectivity among the 8 motor ROIs.
+
+\subsection*{Statistical analysis}
+\label{sec:statanalysis}
+\subsubsection*{\normalfont\underline{Cortical thickness analysis}}
+\label{subsubsec:thickness}
+ Starting from the atlas-coregistered cortical thickness maps produced during the anatomical processing of subjects, we correlated the point-wise cortical thicknesses to the MMSE scores of these subjects. The correlations were converted to p-values using Fisher transformation \cite{fisher1915frequency}. Multiple comparisons across the cortical surface were addressed by applying FDR correction (Benjamini Hochberg procedure) \cite{Benjamini_1995_Controlling_false_discovery}, resulting in a pointwise map of the FDR-corrected p-values. 
+
+ 
+\subsubsection*{\normalfont\underline{Resting-state fMRI analysis}}
+\begin{comment}
+Because rs-fMRI data reflect spontaneous brain activity, it is not possible to directly compare resting-state signals across subjects. Instead, comparisons typically make use of connectivity features \cite{iraji_connectivity_2016}, which are often computed from pairwise correlations of the rs-fMRI time-series between a point of interest and other locations in the brain \cite{fan_human_2016}. 
+\end{comment}
+
+We used three types of complementary analysis to analyze the fMRI data: (1) ALFF analysis to examine change in signal power as a function of MMSE scores at each point on the cortex; (2) motor network analysis that specifically focuses on connectivity among regions of interest involved in motor tasks; (3) point-wise regression to MMSE to measure changes in functional connectivity at each point on the cortex.
+
+\noindent\textbf{ALFF analysis:} 
+%\dws{This probably belongs in the intro: Abnormalities in ALFF that correlate with MMSE might indicate brain regions affected by early AD.}
+At each grayordinate point, we correlated ALFF-Z to the MMSE scores using Pearson's correlation. We performed significance testing of this correlation using Fisher's z-transform to convert correlations to p-values \cite{fisher1915frequency}. This produced a $p$-value at each vertex of the cortical surface. We accounted for multiple comparisons using FDR correction (Benjamini-Hochberg procedure) \cite{Benjamini_1995_Controlling_false_discovery}. 
+
+\noindent\textbf{Brain connectivity analysis:}
+\label{sec:brain_conn_analysis}
+We evaluated the association between MMSE scores and the motor networks (association matrices indicating functional connectivity among the 8 motor ROIs) extracted from the rs-fMRI data. For this analysis, we split the subjects into two groups based on MMSE. Group 1 included all subjects with MMSE in the range 24 $<$ MMSE $\leq$ 29  (N=188, Male=83, Female=105); Group 2 included all subjects MMSE $>$ 29 (N=162, Male=71, Female=91). Here, we assume that the Group 1 subjects may encompass those with questionable dementia or preclinical AD \cite{vos2013preclinical,perneczky2006mapping} (even though they are in the normal range of MMSE) compared to Group 2 subjects, where dementia is rare \cite{shiroky2007can}.  
+We averaged the association matrices within each group. We then compared the group means of each element in the connectivity matrix using a one-sided rank-sum test with the null hypothesis that the mean connectivity of Group 2 is less than or equal to the mean connectivity of Group 1. We accounted for multiple comparisons using the Benjamini-Hochberg method \cite{Benjamini_1995_Controlling_false_discovery} to control the false discovery rate (FDR).
+\begin{comment}
+These results show a decreased functional connectivity between motor regions (precentral gyrus to parahippocampal gyrus, inferior precentral gyrus, parietal lobule, and medial temporal gyrus to the parahippocampal gyrus and precentral to medial temporal gyrus). Although this study uses rs-fMRI where the motor networks were not explicitly activated, these results suggest that cognitive decline impacts motor networks of relevance to manual dexterity. Figure 8B shows the effect size (indicative of differences between the groups) used for sample size calculation in our study.
+\end{comment}
+
+
+\noindent\textbf{BrainSync analysis:}
+An orthogonal transform termed BrainSync performs synchronization of time-series across subjects at homologous locations in the brain \cite{JOSHI2018740}. The transform exploits the correlation structure common across subjects to perform the synchronization. When synchronized, rs-fMRI signals become approximately equal at homologous locations across subjects. The BrainSync transform is lossless and preserves correlation structures. As a result of synchronization, we can directly compare time-series across subjects. 
+ We applied the BrainSync transform to perform the pairwise regression \cite{joshi_pairwise_2021} of the MMSE score with the rs-fMRI data. For the pairwise regression, we considered randomly chosen pairs of subjects and correlated the $L^2$ differences in their synchronized rs-fMRI time-series with the differences in MMSE scores at each cortical point.
+The pairwise regression analysis is performed using 2000 pairs that we selected at random from the study population. For each pair, we synchronized the two subjects using BrainSync and then computed the Euclidean distance between the two time-series at each vertex, which we define as $\Delta_{\mathrm{fMRI}}$. We also computed the difference between the MMSE of the two subjects ($\Delta_{\mathrm{MMSE}}$) in each pair. We then computed the Pearson correlation between $\Delta_{\mathrm{fMRI}}$ and $\Delta_{\mathrm{MMSE}}$ across the 2000 random pairs at each vertex and converted the correlations to $p$-values ($\alpha \leq 0.05$) using a permutation test (2000 permutations). False discovery rate was controlled using the Benjamini-Hochberg method \cite{Benjamini_1995_Controlling_false_discovery}.
+\begin{comment}
+To test the reproducibility of the tests, we repeated the entire experiment for the pairwise statistic with a second set of 2000 randomly selected pairs. For additional verification that the significance that we find is not by chance, randomly permuted MMSE were assigned to the subjects and the test was repeated. For comparison, we used the atlas-based method (BSA)\cite{akrami_group-wise_2019} to create an average atlas from 50 control subjects not already included in the testing group, then synchronized the 150 test subjects to the atlas. At each point, we used the euclidean distance between the synchronized time-series of the subject and the atlas as a voxel-wise univariate statistical feature. We correlated this measure to the MMSE and $p$-values were obtained using a permutation test (2000 permutations, $\alpha \leq 0.05$, FDR $q$=0.05). 
+\end{comment}
+
+
+
+\section*{RESULTS}
+\subsection*{Cortical thickness analysis}
+We generated the cortical thickness maps and computed the correlation of cortical thickness and MMSE at each vertex on the cortical surface mesh as described in Section \ref{subsubsec:thickness}. Fig. \ref{fig:thickness_mmse_corr} shows the thresholded maps of the FDR-corrected p-values for the correlation of cortical thickness and MMSE. These results show that cingulate, parietal lobe, inferior temporal lobe, precuneus and insula are affected. Strikingly, extensive cortical loss was observed, encompassing the sensory-motor cortices bilaterally. This is particularly interesting since, given how prominent the cortical loss is in the sensory-motor regions for this population, the motor symptoms have not been given enough attention in early AD.
+\begin{figure}
+    \centering
+    \includegraphics[width=.9\textwidth]{thickness_hand_knob.pdf}
+    \caption{The p-values computed from correlation of cortical thickness to MMSE score, thresholded at 0.05 after FDR correction. The arrows point to the hand knob region. }
+    \label{fig:thickness_mmse_corr}
+\end{figure}
+
+\subsection*{Resting-state fMRI analysis}
+\subsubsection*{\normalfont\underline{ALFF analysis}}
+We observed a significant correlation between MMSE and ALFF-Z scores at the bilateral precentral gyrus (primary motor cortex), as shown in Fig. \ref{fig:alff_z_mmse_corr}. The regions with significant correlation included the `hand knob' of the motor cortex, which is a knob-like segment of the precentral gyrus that controls voluntary hand movements \cite{yousry1997localization}.  
+%\dws{what can you say about the other areas of correlation?}
+
+ \begin{figure}
+    \centering
+    \includegraphics[width=0.9\textwidth]{hand_knob_fmri.pdf}
+    \caption{The p-values computed from correlation of ALFF-Z to MMSE score, thresholded at 0.05 after FDR correction. The arrows point to the hand knob region.}
+    \label{fig:alff_z_mmse_corr}
+\end{figure}
+
+\subsubsection*{\normalfont\underline{Brain connectivity analysis}}
+We analyzed the group differences in connectivity between the motor regions listed in Figure \ref{fig:motor_networks_rois}(a) for the subjects in Groups 1 and 2 defined above. 
+Figure \ref{fig:motor_networks_rois}(b) shows average connectivity matrices for the two groups. Figure \ref{fig:motor_networks_rois}(c) shows the matrix of FDR-corrected p-values $<$ 0.05, for the ROIs where significant differences were detected between the groups. Decreased functional connectivity was noted between motor regions. We note that this study used rs-fMRI, during which the motor networks were not explicitly activated. Still, these results suggest that a decline in cognitive function, based on MMSE score, is associated with a corresponding decline (i.e., decreased functional connectivity) in the motor networks relevant to manual dexterity. 
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{motor_networks_v2.pdf}
+    \caption{Connectivity analysis study for mapping differences between Group 1 (24 $<$ MMSE $\leq$ 29) and Group 2 (MMSE $>$ 29) population. Altered connectivity is found between the ROIs that are related to manual dexterity.}
+    \label{fig:motor_networks_rois}
+\end{figure}
+
+
+\subsubsection*{\normalfont\underline{BrainSync analysis}}
+ The pairwise regression of the MMSE score with rs-fMRI, shown in Fig. \ref{fig:fmri_gt26}, indicates an association of MMSE with functional changes in the motor regions. It can be seen that the motor cortex (along with other brain regions) is associated bilaterally with MMSE, indicating that the motor cortex is impacted in the 24 $<$ MMSE $\leq$ 29 population. The correlation computed during the pairwise regression procedure between MMSE and the pre- and post-central gyrus was 0.10 (average) and 0.31 (peak). This suggests that the trajectory of motor function loss might parallel the trajectory of cognitive loss, even at a very early stage of AD. Our results also showed an association of MMSE with the frontal and parietal lobes. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{fmri_motor.pdf}
+    \caption{The correlation of MMSE to rs-fMRI is computed by using the pairwise regression procedure for subjects with MMSE$>$24. Arrows indicate the approximate hand area within the motor cortex.}
+    \label{fig:fmri_gt26}
+\end{figure}
+
+
+
+\section*{Discussion}
+Motor networks are impacted in advanced AD, which manifestly impacts motor function. However, the impact on motor networks in early AD may be masked by neuroplasticity and adaptation and might not be fully revealed by behavioral studies. Our study, which uses structural and functional MRI imaging data, shows evidence of the adverse impact on motor regions and networks of early AD pathology, as assessed by MMSE scores. Cortical thickness analyses revealed degeneration in motor areas, especially the hand-associated regions. Additionally, rs-fMRI analyses showed a significantly adverse impact on motor networks during early AD, as indicated by the MMSE scores. This was despite the motor networks not being explicitly activated. This impact was especially evident in areas of importance to networks engaged in hand motion and manual dexterity. 
+
+While the AT(N) framework (amyloid, tau, neurodegeneration) for quantifying biomarkers of Alzheimer’s disease has become accepted in research, the specificity of neurodegeneration biomarkers is still questioned \cite{jack_jr_niaaa_2018}. However, there remains an opportunity to quantify ``complex patterns of tissue loss'' through ``data-driven statistical approaches in which many different brain regions are evaluated simultaneously'', as suggested in \cite{albert2011diagnosis}. By examining patterns of cortical thickness throughout the brain and motor networks derived from fMRI, our work begins to fill this gap.
+
+While we reproduced well-known results showing degeneration in the medial temporal lobe in early AD (e.g., Braak stages I-IV \cite{braak1991neuropathological}), the strong signal in and around the motor cortex may provide new insight into the motor impairments reviewed in the introduction. Amyloid and tau pathology has been observed in the motor cortex in the late and terminal stages of the disease, but our results suggest structural and functional abnormalities may be detectable much earlier in cognitively normal individuals.
+
+When considering motor symptoms, one potential confounder is the presence of an alpha-synuclein disease co-morbidity. Such a co-morbidity may cause both disruption of the motor system and cognitive deficits, even though such diseases are not part of the pathophysiological process of AD.  Because our dataset does not quantify these potential co-morbidities, we were not able to adjust for such a confounder in our analysis. However, alpha-synuclein pathology has been reported in more than half of all autopsy-confirmed AD cases \cite{lippa1998lewy} and may still be a useful part of an Alzheimer's biomarker whether the association is correlational or causal \cite{twohig2019alpha}.
+
+%ANAND - add explanation about different results from cortical thickening versus fMRI.
+
+Some limitations of our study must be noted. First, the study utilized an already existing dataset and any confounders associated with the original data collection may be introduced in our results. Second, the statistical power to evaluate the association between rs-fMRI measures and MMSE was low since only resting-state data were available. 
+
+This preliminary study shows converging evidence for the potential impact of preclinical/early AD neuropathology on motor networks. The statistical power offered by rs-fMRI may not be sufficient for individual-level or small-cohort studies since motor networks are not explicitly activated during resting state. The findings presented here provide strong motivation for the potential use of fMRI conducted during the performance of tasks of manual dexterity in future studies to increase statistical power and to better understand the pathogenesis of motor dysfunction alongside AD-associated cognitive decline.
+
+\section*{Acknowledgements}
+Data were provided by OASIS-3: Longitudinal Multimodal Neuroimaging: Principal Investigators: T. Benzinger, D. Marcus, J. Morris; NIH P30 AG066444, P50 AG00561, P30 NS09857781, P01 AG026276, P01 AG003991, R01 AG043434, UL1 TR000448, R01 EB009352. 
+
+\section*{Funding}
+This work is supported by NIH grants: R01EB026299, R01NS074980,  R01NS121761, R01AR076088 and DoD grants: W81XWH181061, HT94252310149.
+
+\section*{Conflict of Interest}
+All authors declare no conflicts of interest relevant to this manuscript.
+
+
+\section*{Data and Code Availability}
+The data used in this study is available from the OASIS-3 project at \url{https://sites.wustl.edu/oasisbrains/home/oasis-3/} \cite{OASIS-3}. The source code and OASIS-3 subject IDs used for the study will be made available at \url{https://github.com/ajoshiusc/AD_processing} upon the acceptance of this manuscript. BrainSuite is open-source and available from \url{https://brainsuite.org}. The software for the BrainSuite Functional Pipeline is available from \url{https://github.com/ajoshiusc/bfp/}. These tools are also available within the BrainSuite BIDS App framework (\url{https://brainsuite.org/BIDS/}).
+
+
+
+
+\bibliographystyle{elsarticle-num} 
+\bibliography{myref.bib}%erences,Zotero_AD-Grant_Library}%,zotero_ref}%,
+
+
+
+
+
+
+
+
+\newpage
+\section*{Figure Captions}
+
+\textbf{Figure 1:} Summary of demographics of the study population. The male/female ratio, as well as the distributions of MMSE scores and age, are shown. Note that in the paper, MMSE is averaged over multiple visits, and hence, is not necessarily integer-valued.
+
+
+\textbf{Figure 2:} The p-values computed from correlation of cortical thickness to MMSE score, thresholded at 0.05 after FDR correction. The arrows point to the hand knob region. 
+
+
+\textbf{Figure 3:} The p-values computed from correlation of ALFF-Z to MMSE score, thresholded at 0.05 after FDR correction. The arrows point to the hand knob region.
+
+
+\textbf{Figure 4:} Connectivity analysis study for mapping differences between Group 1 (24 $<$ MMSE $\leq$ 29) and Group 2 (MMSE $>$ 29) population. Altered connectivity is found between the ROIs that are related to manual dexterity.
+
+
+\textbf{Figure 5:} The correlation of MMSE to rs-fMRI is computed by using the pairwise regression procedure for subjects with MMSE$>$24. Arrows indicate the approximate hand area within the motor cortex.
+
+\end{document}
+\endinput
+%%
+%% End of file `elsarticle-template-num.tex'.

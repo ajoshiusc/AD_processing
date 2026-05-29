@@ -7,7 +7,6 @@ import scipy.io as spio
 
 
 def read_oasis3_data(csv_fname,
-                     data_dir,
                      reg_var_name='Age',
                      num_sub=5,
                      reg_var_positive=1,
@@ -21,10 +20,10 @@ def read_oasis3_data(csv_fname,
     reg_var = []
     pbar = tqdm(total=num_sub)
 
-    with open(good_subs_list, 'r') as f:
+    with open(good_subs_list, 'r', encoding='utf-8') as f:
         good_subids = f.read().splitlines()
 
-    with open(csv_fname, newline='') as csvfile:
+    with open(csv_fname, newline='', encoding='utf-8') as csvfile:
         creader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
         for row in creader:
 
@@ -85,7 +84,7 @@ def read_oasis3_SCT(csv_fname,
     reg_var = []
     pbar = tqdm(total=num_sub)
 
-    with open(csv_fname, newline='') as csvfile:
+    with open(csv_fname, newline='', encoding='utf-8') as csvfile:
         creader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
         for row in creader:
 
@@ -123,6 +122,74 @@ def read_oasis3_SCT(csv_fname,
           (len(sub_ids)))
 
     return sub_ids, sp.array(reg_var), sub_data_files
+
+
+
+def read_oasis3_thickness_mmse_suvr(csv_fname,
+                          reg_var_mmse_name='closest_day_mmse_value',
+                          reg_var_suvr_name='closest_day_suvr_value',
+                          num_sub=5,
+                          good_subs_list=''):
+
+    count1 = 0
+    sub_ids = []
+    reg_var_mmse = []
+    reg_var_suvr = []
+    sub_data_files = []
+    pbar = tqdm(total=num_sub)
+
+    with open(good_subs_list, 'r', encoding='utf-8') as f:
+
+        good_subids = f.read().splitlines()
+
+    with open(csv_fname, newline='', encoding='utf-8') as csvfile:
+        creader = csv.DictReader(csvfile, delimiter=',', quotechar='"')
+        for row in creader:
+
+            # read the regression variable
+            rvar_mmse = row[reg_var_mmse_name]
+            rvar_suvr = row[reg_var_suvr_name]
+
+            # Read the filtered data by default
+            fname = row['FileName']
+
+            # If the data does not exist for this subject then skip it
+            if not os.path.isfile(fname):
+                print('file %s does not exist\n' % fname)
+                continue
+
+            if len(rvar_mmse) == 0 or (np.float64(rvar_mmse) < 0) or len(rvar_suvr) == 0 or (np.float64(rvar_suvr) < 0):
+                print('data for either mmse or suvr is not available')
+                continue
+
+            if count1 == 0:
+                sub_data_files = []
+
+            # Truncate the data at a given number of time samples This is needed because
+            # BrainSync needs same number of time sampples
+            new_sub_id = row['Subject']
+
+            if new_sub_id in good_subids:
+                sub_data_files.append(fname)
+                sub_ids.append(row['Subject'])
+                reg_var_mmse.append(float(rvar_mmse))
+                reg_var_suvr.append(float(rvar_suvr))
+
+            count1 += 1
+            pbar.update(1)
+            # update the progress bar
+            #print('%d,' % count1, end='')
+            if count1 == num_sub:
+                break
+
+    pbar.close()
+    print('CSV file and the data has been read\nThere are %d subjects' %
+          (len(sub_ids)))
+
+    return sub_ids, np.array(reg_var_mmse), np.array(reg_var_suvr), sub_data_files
+
+
+
 
 
 def read_oasis3_thickness(csv_fname,

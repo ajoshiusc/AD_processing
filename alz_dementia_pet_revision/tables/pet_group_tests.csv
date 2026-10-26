@@ -1,0 +1,2 @@
+age_ttest_p,sex_chi2_p,mmse_ttest_p,cdr_mannwhitney_p,suvr_spearman_mmse_rho,suvr_spearman_mmse_p,good_subids_n,good_subids_a_pos,good_subids_a_neg
+1.4912331291740533e-18,0.012531696219751715,5.079678657389875e-05,2.3302163978262907e-13,-0.12998218638696543,0.004139278842324618,398,104,294

@@ -1,0 +1,2 @@
+n,a_neg,a_pos,thickness_files_available,min_p,min_q_fdr,fdr_sig_vertices,uncorrected_p_lt_0_05_vertices,note
+349,279,70,0,,,,,Raw thickness .mat files were not mounted; sensitivity map was not regenerated.
